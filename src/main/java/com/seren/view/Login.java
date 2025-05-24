@@ -258,6 +258,9 @@ public class Login extends javax.swing.JFrame {
 
         if (usuarioLogado != null) {
             JOptionPane.showMessageDialog(null, "Login com sucesso!");
+            TelaInicial paginaInicial = new TelaInicial(usuarioLogado);
+            paginaInicial.setVisible(true);
+            setVisible(false);
 
         } else {
             JOptionPane.showMessageDialog(null, "Credenciais inválidas.");

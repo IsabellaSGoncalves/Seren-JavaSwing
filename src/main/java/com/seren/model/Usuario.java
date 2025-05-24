@@ -4,38 +4,42 @@
  */
 package com.seren.model;
 
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author Pichau
  */
 public class Usuario {
 
-    private int id;
+    @BsonId
+    private ObjectId id;
     private String nome;
     private String email;
     private long telefone;
     private String senha;
-
+    
+    // construtor para criar novo usuário 
     public Usuario(String nome, String email, String telefone, String senha) {
+        this.id = new ObjectId();
         this.nome = nome;
         this.telefone = Long.parseLong(telefone);
         this.email = email;
         this.senha = senha;
     }
-
-    public Usuario(String email, String nome, long telefone, String senha) {
-        this.email = email;
+    
+    // construtor para usuário vindo do banco
+    public Usuario(ObjectId id, String nome, String email, long telefone, String senha) {
+        this.id = id;
         this.nome = nome;
         this.telefone = telefone;
+        this.email = email;
         this.senha = senha;
     }
 
-    public int getId() {
+    public ObjectId getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {

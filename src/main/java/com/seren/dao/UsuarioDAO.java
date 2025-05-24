@@ -32,7 +32,9 @@ public class UsuarioDAO {
 
         if (resultado == null) {
             String senhaCriptografada = BCrypt.hashpw(usuario.getSenha(), BCrypt.gensalt());
-            Document u = new Document("email", usuario.getEmail())
+            Document u = new Document(
+                    "_id", usuario.getId())
+                    .append("email", usuario.getEmail())
                     .append("username", usuario.getNome())
                     .append("senha", senhaCriptografada)
                     .append("telefone", usuario.getTelefone());
@@ -52,8 +54,9 @@ public class UsuarioDAO {
             String senhaArmazenada = resultado.getString("senha");
             if (BCrypt.checkpw(senha, senhaArmazenada)) {
                 return new Usuario(
-                        resultado.getString("email"),
+                        resultado.getObjectId("_id"),
                         resultado.getString("username"),
+                        resultado.getString("email"),
                         resultado.getLong("telefone"),
                        null
                 );
