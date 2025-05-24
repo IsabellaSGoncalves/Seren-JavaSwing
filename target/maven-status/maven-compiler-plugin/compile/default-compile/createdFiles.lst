@@ -15,5 +15,4 @@ com\seren\dao\UsuarioDAO.class
 com\seren\model\Usuario.class
 com\seren\view\Login$2.class
 com\seren\view\Cadastro$1.class
-com\seren\view\Cadastro$6.class
 com\seren\view\Cadastro.class
