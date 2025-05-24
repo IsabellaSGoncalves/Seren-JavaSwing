@@ -360,7 +360,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         telefone = telefone.replaceAll("[^\\d]", "");
 
-        if (telefone.length() < 11) {
+        if (telefone.length() < 11 || telefone.length() > 11) {
             JOptionPane.showMessageDialog(null, "Insira um número de telefone válido");
             return;
         }
