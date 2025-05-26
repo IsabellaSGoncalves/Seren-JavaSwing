@@ -61,14 +61,13 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         senhaInputLogin = new javax.swing.JPasswordField();
         jCheckBox1 = new javax.swing.JCheckBox();
-        loginButton = new javax.swing.JButton();
+        loginButton = new com.seren.components.RoundedButton(30);
         jPanel9 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Seren - Login");
         setBackground(new java.awt.Color(255, 153, 204));
-        setPreferredSize(new java.awt.Dimension(940, 665));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 0));
         jPanel2.setMinimumSize(new java.awt.Dimension(920, 630));
@@ -120,6 +119,7 @@ public class Login extends javax.swing.JFrame {
         cadastroButton1.setText("Cadastre-se");
         cadastroButton1.setToolTipText("");
         cadastroButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        cadastroButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cadastroButton1.setMinimumSize(new java.awt.Dimension(200, 40));
         cadastroButton1.setPreferredSize(new java.awt.Dimension(200, 40));
         cadastroButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -206,10 +206,12 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Email");
 
+        emailInputLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         emailInputLogin.setToolTipText("");
         emailInputLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         emailInputLogin.setCaretColor(new java.awt.Color(204, 204, 204));
         emailInputLogin.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        emailInputLogin.setMargin(new java.awt.Insets(10, 10, 10, 10));
         emailInputLogin.setNextFocusableComponent(senhaInputLogin);
         emailInputLogin.setPreferredSize(new java.awt.Dimension(200, 30));
         emailInputLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -221,6 +223,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Senha");
 
+        senhaInputLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         senhaInputLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         senhaInputLogin.setNextFocusableComponent(loginButton);
         senhaInputLogin.setPreferredSize(new java.awt.Dimension(200, 30));
@@ -236,6 +239,8 @@ public class Login extends javax.swing.JFrame {
         loginButton.setToolTipText("");
         loginButton.setAlignmentY(0.0F);
         loginButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(1, 66, 158)));
+        loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        loginButton.setPreferredSize(new java.awt.Dimension(200, 40));
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
@@ -258,7 +263,7 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(senhaInputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(emailInputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(127, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -274,7 +279,7 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox1)
                 .addGap(45, 45, 45)
-                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -314,15 +319,11 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

@@ -5,6 +5,9 @@
 package com.seren.view;
 
 import com.seren.model.Usuario;
+import javax.swing.ImageIcon;
+import com.seren.components.RoundedPanel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,33 +15,63 @@ import com.seren.model.Usuario;
  */
 public class TelaInicial extends javax.swing.JFrame {
 
+    private TelaPacientes telaPacientes;
+
     /**
      * Creates new form PaginaInicial
      */
     public TelaInicial() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/iconLogo.png")).getImage());
     }
-    
+
     private Usuario usuario;
-    
-    public TelaInicial(Usuario usuarioLogado){
+
+    public TelaInicial(Usuario usuarioLogado) {
         initComponents();
         this.usuario = usuarioLogado;
         exibirSaudacao();
+
+        labelSerengotoInitialScreen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (telaPacientes != null && telaPacientes.isVisible()) {
+                    try {
+                        telaPacientes.setClosed(true);
+                        telaPacientes = null;
+                    } catch (java.beans.PropertyVetoException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        labelSerengotoInitialScreen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        labelSairgotoLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                Login login = new Login();
+                JOptionPane.showMessageDialog(null, "Sessão encerrada!");
+                login.setVisible(true);
+                setVisible(false);
+            }
+        });
+
+        labelSairgotoLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }
-    
-    private void exibirSaudacao(){
+
+    private void exibirSaudacao() {
         String saudacao;
         int hora = java.time.LocalTime.now().getHour();
-        
-        if(hora >= 5 && hora < 12){
+
+        if (hora >= 5 && hora < 12) {
             saudacao = "Bom dia";
-        } else if (hora >= 12 && hora < 18){
+        } else if (hora >= 12 && hora < 18) {
             saudacao = "Boa tarde";
         } else {
             saudacao = "Boa noite";
         }
-        
+
         labelApresentarUsername.setText(saudacao + ", " + usuario.getNome());
     }
 
@@ -52,84 +85,240 @@ public class TelaInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        labelApresentarUsername = new javax.swing.JLabel();
-        pacientesButton = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        labelApresentarUsername = new javax.swing.JLabel();
+        jPanel3 = new com.seren.components.RoundedPanel(30);
+        pacientesButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        labelSerengotoInitialScreen = new javax.swing.JLabel();
+        jPanel7 = new com.seren.components.RoundedPanel(30);
+        labelSairgotoLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Seren - Tela inicial");
+        setBackground(new java.awt.Color(51, 255, 51));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(new java.awt.Dimension(940, 665));
 
+        jPanel1.setBackground(new java.awt.Color(255, 51, 204));
+        jPanel1.setMinimumSize(new java.awt.Dimension(920, 630));
+        jPanel1.setPreferredSize(new java.awt.Dimension(920, 630));
+        jPanel1.setLayout(null);
+
+        jDesktopPane1.setBackground(new java.awt.Color(255, 246, 248));
+        jDesktopPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        labelApresentarUsername.setBackground(new java.awt.Color(255, 246, 248));
+        labelApresentarUsername.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
         labelApresentarUsername.setText("Bom dia, Usuário!");
 
+        jPanel3.setBackground(new java.awt.Color(255, 230, 234));
+        jPanel3.setMinimumSize(new java.awt.Dimension(120, 120));
+        jPanel3.setPreferredSize(new java.awt.Dimension(200, 200));
+        jPanel3.setLayout(null);
+
+        pacientesButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         pacientesButton.setText("Pacientes");
         pacientesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pacientesButtonActionPerformed(evt);
             }
         });
+        jPanel3.add(pacientesButton);
+        pacientesButton.setBounds(10, 150, 180, 40);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PacientesIcon.png"))); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(190, 190));
+        jPanel3.add(jLabel1);
+        jLabel1.setBounds(30, 10, 140, 140);
+
+        jPanel4.setMinimumSize(new java.awt.Dimension(120, 120));
+        jPanel4.setPreferredSize(new java.awt.Dimension(200, 200));
+
+        jButton1.setText("jButton1");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jButton1)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(145, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(32, 32, 32))
+        );
+
+        jPanel5.setMinimumSize(new java.awt.Dimension(120, 120));
+        jPanel5.setPreferredSize(new java.awt.Dimension(200, 200));
+
+        jButton2.setText("jButton1");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jButton2)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(32, 32, 32))
+        );
+
+        jPanel6.setMinimumSize(new java.awt.Dimension(120, 120));
+        jPanel6.setPreferredSize(new java.awt.Dimension(200, 200));
+
+        jButton3.setText("jButton1");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jButton3)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(145, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(32, 32, 32))
+        );
+
+        jDesktopPane1.setLayer(labelApresentarUsername, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jPanel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jPanel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 611, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelApresentarUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(296, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(labelApresentarUsername)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(labelApresentarUsername)
-                        .addGap(18, 18, 18)
-                        .addComponent(pacientesButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+        jPanel1.add(jDesktopPane1);
+        jDesktopPane1.setBounds(200, 0, 740, 630);
+
+        jPanel2.setBackground(new java.awt.Color(255, 246, 248));
+        jPanel2.setLayout(null);
+
+        labelSerengotoInitialScreen.setBackground(new java.awt.Color(1, 66, 158));
+        labelSerengotoInitialScreen.setFont(new java.awt.Font("Segoe Script", 0, 48)); // NOI18N
+        labelSerengotoInitialScreen.setForeground(new java.awt.Color(1, 66, 158));
+        labelSerengotoInitialScreen.setText("Seren");
+        labelSerengotoInitialScreen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.add(labelSerengotoInitialScreen);
+        labelSerengotoInitialScreen.setBounds(24, 17, 150, 77);
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        labelSairgotoLogin.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        labelSairgotoLogin.setForeground(new java.awt.Color(255, 51, 51));
+        labelSairgotoLogin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelSairgotoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Log out.png"))); // NOI18N
+        labelSairgotoLogin.setText("Sair");
+        labelSairgotoLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelSairgotoLogin.setIconTextGap(10);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelSairgotoLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelApresentarUsername)
-                    .addComponent(pacientesButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(473, Short.MAX_VALUE)
+                .addComponent(labelSairgotoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        jPanel2.add(jPanel7);
+        jPanel7.setBounds(14, 100, 168, 512);
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 0, 200, 630);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
 
     private void pacientesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacientesButtonActionPerformed
         // TODO add your handling code here:
-        TelaPacientes pacientes = new TelaPacientes(this.usuario);
-        jDesktopPane1.add(pacientes);
-        pacientes.setVisible(true);
+        if (telaPacientes == null || telaPacientes.isClosed()) {
+            telaPacientes = new TelaPacientes(this.usuario);
+            jDesktopPane1.add(telaPacientes);
+            telaPacientes.setVisible(true);
+        }
     }//GEN-LAST:event_pacientesButtonActionPerformed
 
     /**
@@ -169,9 +358,21 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel labelApresentarUsername;
+    private javax.swing.JLabel labelSairgotoLogin;
+    private javax.swing.JLabel labelSerengotoInitialScreen;
     private javax.swing.JButton pacientesButton;
     // End of variables declaration//GEN-END:variables
 }

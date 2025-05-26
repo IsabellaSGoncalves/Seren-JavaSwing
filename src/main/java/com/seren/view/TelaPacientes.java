@@ -8,6 +8,7 @@ import com.seren.controller.BuscarPacientesController;
 import com.seren.model.Paciente;
 import com.seren.model.Usuario;
 import java.util.ArrayList;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 
@@ -23,36 +24,38 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
     public TelaPacientes() {
         initComponents();
     }
-    
+
     private Usuario usuario;
     BuscarPacientesController controller = new BuscarPacientesController();
-    
-    public TelaPacientes(Usuario usuarioLogado){
+
+    public TelaPacientes(Usuario usuarioLogado) {
         initComponents();
         this.usuario = usuarioLogado;
-        
+        this.setBorder(null);
+        BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
+        ui.setNorthPane(null);
         carregarPacientesNaTabela();
     }
 
-    private void carregarPacientesNaTabela(){
+    private void carregarPacientesNaTabela() {
         DefaultTableModel modelo = new DefaultTableModel();
-        
+
         ArrayList<Document> listaPacientes = controller.BuscarPacientes(usuario.getId());
         modelo.addColumn("Nome");
-        
-        if(!listaPacientes.isEmpty()){
-         for(Document doc : listaPacientes){
-            modelo.addRow(new Object[]{
-                doc.getString("nome")
-            });
-        }   
+
+        if (!listaPacientes.isEmpty()) {
+            for (Document doc : listaPacientes) {
+                modelo.addRow(new Object[]{
+                    doc.getString("nome")
+                });
+            }
         } else {
-            modelo.addRow(new Object[]
-            {"Nenhum paciente encontrado"});
+            modelo.addRow(new Object[]{"Nenhum paciente encontrado"});
         }
-        
+
         tabelaPacientes.setModel(modelo);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,6 +73,10 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+
+        setPreferredSize(new java.awt.Dimension(700, 630));
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 600));
 
         tabelaPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,7 +98,7 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         jDesktopPane2Layout.setHorizontalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
-                .addContainerGap(99, Short.MAX_VALUE)
+                .addContainerGap(174, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74))
         );
@@ -113,7 +120,7 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Ações");
@@ -143,9 +150,7 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
