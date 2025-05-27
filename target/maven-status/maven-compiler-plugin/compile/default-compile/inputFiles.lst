@@ -1,14 +1,5 @@
-<<<<<<< HEAD
-C:\Users\narie\Documents\NetBeansProjects\Seren-JavaSwing\src\main\java\com\seren\controller\CadastroController.java
-C:\Users\narie\Documents\NetBeansProjects\Seren-JavaSwing\src\main\java\com\seren\controller\LoginController.java
-C:\Users\narie\Documents\NetBeansProjects\Seren-JavaSwing\src\main\java\com\seren\dao\UsuarioDAO.java
-C:\Users\narie\Documents\NetBeansProjects\Seren-JavaSwing\src\main\java\com\seren\model\Usuario.java
-C:\Users\narie\Documents\NetBeansProjects\Seren-JavaSwing\src\main\java\com\seren\Seren.java
-C:\Users\narie\Documents\NetBeansProjects\Seren-JavaSwing\src\main\java\com\seren\util\ConfigUtil.java
-C:\Users\narie\Documents\NetBeansProjects\Seren-JavaSwing\src\main\java\com\seren\util\MongoConnection.java
-C:\Users\narie\Documents\NetBeansProjects\Seren-JavaSwing\src\main\java\com\seren\view\Cadastro.java
-C:\Users\narie\Documents\NetBeansProjects\Seren-JavaSwing\src\main\java\com\seren\view\Login.java
-=======
+C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\controller\AlterarPacienteController.java
+C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\controller\BuscarPacienteController.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\controller\BuscarPacientesController.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\controller\CadastroController.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\controller\CriarPacienteController.java
@@ -22,7 +13,8 @@ C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\util\Co
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\util\MongoConnection.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\view\Cadastro.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\view\Login.java
+C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\view\TelaBuscarPaciente.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\view\TelaCadastrarPaciente.java
+C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\view\TelaEditarPaciente.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\view\TelaInicial.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\view\TelaPacientes.java
->>>>>>> feature/Crud-Paciente

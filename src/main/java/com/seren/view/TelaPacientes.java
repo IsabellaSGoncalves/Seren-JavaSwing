@@ -4,10 +4,15 @@
  */
 package com.seren.view;
 
+import com.seren.controller.BuscarPacienteController;
 import com.seren.controller.BuscarPacientesController;
 import com.seren.model.Paciente;
 import com.seren.model.Usuario;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 
@@ -23,36 +28,63 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
     public TelaPacientes() {
         initComponents();
     }
-    
+
     private Usuario usuario;
-    BuscarPacientesController controller = new BuscarPacientesController();
-    
-    public TelaPacientes(Usuario usuarioLogado){
+    BuscarPacientesController buscarPacientesController = new BuscarPacientesController();
+    BuscarPacienteController buscarPacienteController = new BuscarPacienteController();
+    private ArrayList<Document> listaPacientes = new ArrayList<>();
+
+    private JPopupMenu menuPopup;
+    private JMenuItem menuEditar;
+
+    public TelaPacientes(Usuario usuarioLogado) {
         initComponents();
         this.usuario = usuarioLogado;
-        
+
+        criarMenuPopup();
+        adicionarListenerTabela();
         carregarPacientesNaTabela();
     }
 
-    private void carregarPacientesNaTabela(){
+    public void carregarPacientesNaTabela() {
         DefaultTableModel modelo = new DefaultTableModel();
-        
-        ArrayList<Document> listaPacientes = controller.BuscarPacientes(usuario.getId());
+
+        listaPacientes = buscarPacientesController.buscarPacientes(usuario.getId());
         modelo.addColumn("Nome");
-        
-        if(!listaPacientes.isEmpty()){
-         for(Document doc : listaPacientes){
-            modelo.addRow(new Object[]{
-                doc.getString("nome")
-            });
-        }   
+
+        if (!listaPacientes.isEmpty()) {
+            for (Document doc : listaPacientes) {
+                modelo.addRow(new Object[]{
+                    doc.getString("nome")
+                });
+            }
         } else {
-            modelo.addRow(new Object[]
-            {"Nenhum paciente encontrado"});
+            modelo.addRow(new Object[]{"Nenhum paciente encontrado"});
         }
-        
+
         tabelaPacientes.setModel(modelo);
     }
+
+    public void filtrarTabela(String nome) {
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("Nome");
+
+        listaPacientes = buscarPacienteController.buscarPacientes(usuario.getId(), nome);
+
+        if (!listaPacientes.isEmpty()) {
+            for (Document doc : listaPacientes) {
+                modelo.addRow(new Object[]{
+                    doc.getString("nome")
+                });
+            }
+        } else {
+            modelo.addRow(new Object[]{"Nenhum paciente encontrado"});
+        }
+
+        tabelaPacientes.setModel(modelo);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,6 +94,7 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
         jDesktopPane2 = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -70,6 +103,17 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         tabelaPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,6 +171,11 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Buscar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
@@ -151,6 +200,54 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void criarMenuPopup() {
+        menuPopup = new JPopupMenu();
+
+        menuEditar = new JMenuItem("Editar");
+
+        menuPopup.add(menuEditar);
+
+        menuEditar.addActionListener(e -> editarPacienteSelecionado());
+
+    }
+
+    private void adicionarListenerTabela() {
+        tabelaPacientes.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    mostrarMenuPopup(e);
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    mostrarMenuPopup(e);
+                }
+            }
+        });
+    }
+
+    private void mostrarMenuPopup(MouseEvent e) {
+        int row = tabelaPacientes.rowAtPoint(e.getPoint());
+        if (row >= 0 && row < listaPacientes.size()) {
+            tabelaPacientes.setRowSelectionInterval(row, row);
+            menuPopup.show(e.getComponent(), e.getX(), e.getY());
+        }
+    }
+
+    private void editarPacienteSelecionado() {
+        int row = tabelaPacientes.getSelectedRow();
+        if (row >= 0 && row < listaPacientes.size()) {
+            Document docSelecionado = listaPacientes.get(row);
+            Paciente paciente = Paciente.pacienteDocumento(docSelecionado);
+            TelaEditarPaciente telaEditar = new TelaEditarPaciente(this.usuario, paciente, this);
+            jDesktopPane2.add(telaEditar);
+            telaEditar.setVisible(true);
+        }
+    }
+
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         TelaCadastrarPaciente cadastrarPaciente = new TelaCadastrarPaciente(this.usuario);
@@ -158,9 +255,17 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         cadastrarPaciente.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        TelaBuscarPaciente buscarPaciente = new TelaBuscarPaciente(this.usuario, this);
+        jDesktopPane2.add(buscarPaciente);
+        buscarPaciente.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane2;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
