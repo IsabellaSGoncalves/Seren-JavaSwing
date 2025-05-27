@@ -127,7 +127,7 @@ public class Cadastro extends javax.swing.JFrame {
         cadastroButton.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         cadastroButton.setForeground(new java.awt.Color(255, 255, 255));
         cadastroButton.setText("Criar Conta");
-        cadastroButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastroButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastroButton.setMinimumSize(new java.awt.Dimension(200, 40));
         cadastroButton.setPreferredSize(new java.awt.Dimension(200, 40));
         cadastroButton.addActionListener(new java.awt.event.ActionListener() {

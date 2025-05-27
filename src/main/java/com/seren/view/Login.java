@@ -68,7 +68,6 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Seren - Login");
         setBackground(new java.awt.Color(255, 153, 204));
-        setPreferredSize(new java.awt.Dimension(940, 665));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 0));
         jPanel2.setMinimumSize(new java.awt.Dimension(920, 630));
