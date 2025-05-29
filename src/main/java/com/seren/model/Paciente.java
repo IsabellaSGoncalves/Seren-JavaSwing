@@ -4,6 +4,7 @@
  */
 package com.seren.model;
 
+import com.seren.util.DataUtil;
 import java.util.Date;
 import org.bson.Document;
 import org.bson.codecs.pojo.annotations.BsonId;
@@ -26,6 +27,7 @@ public class Paciente {
     private Date dataNascimento;
     private ObjectId id_usuario;
 
+    // construtor para novo paciente
     public Paciente(String nome, String profissao, String genero, String estadoCivil, String telefone, 
     String email, String preferenciaContato, Date dataNascimento, ObjectId id_usuario) {
         this.id = new ObjectId();
@@ -40,6 +42,7 @@ public class Paciente {
         this.id_usuario = id_usuario;
     }
     
+    // construtor para paciente vindo do banco
     public Paciente(ObjectId id, String nome, String profissao, String genero, String estadoCivil, Long telefone, 
     String email, String preferenciaContato, Date dataNascimento, ObjectId id_usuario) {
         this.id = id;
@@ -54,6 +57,7 @@ public class Paciente {
         this.id_usuario = id_usuario;
     }
     
+    // construtor para paciente que foi recebido como documento do banco
     public static Paciente pacienteDocumento(Document doc) {
     return new Paciente(
         doc.getObjectId("_id"),              
@@ -68,7 +72,6 @@ public class Paciente {
         doc.getObjectId("id_usuario")
     );
 }
-
 
     public ObjectId getId() {
         return id;
@@ -145,5 +148,9 @@ public class Paciente {
         this.id_usuario = id_usuario;
     }
     
+    // método para retornar a idade com cálculo baseado na data de nascimento
+    public int getIdade() {
+        return DataUtil.calcularIdade(dataNascimento);
+    }
     
 }

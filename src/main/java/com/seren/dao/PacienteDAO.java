@@ -102,4 +102,13 @@ public class PacienteDAO {
         return true;
     }
 
+    public boolean excluirPaciente(ObjectId id) {
+        Document filtro = new Document("_id", id);
+        Document resultado = collection.find(filtro).first();
+
+        if (resultado != null) {
+            return collection.deleteOne(resultado).getDeletedCount() == 1;
+        }
+        return false;
+    }
 }

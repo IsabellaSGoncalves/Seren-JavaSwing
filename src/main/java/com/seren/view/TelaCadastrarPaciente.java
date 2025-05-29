@@ -26,10 +26,12 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
         initComponents();
     }
     private Usuario usuario;
+    private TelaPacientes telaPacientes;
     
-    public TelaCadastrarPaciente(Usuario usuarioLogado){
+    public TelaCadastrarPaciente(Usuario usuarioLogado, TelaPacientes telaPacientes){
         initComponents();
         this.usuario = usuarioLogado;
+        this.telaPacientes = telaPacientes;
     }
 
     /**
@@ -238,6 +240,7 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
         if(sucesso){
             JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
             setVisible(false);
+            telaPacientes.carregarPacientesNaTabela();
         } else {
             JOptionPane.showMessageDialog(null, "Paciente já cadastrado anteriormente");
         }

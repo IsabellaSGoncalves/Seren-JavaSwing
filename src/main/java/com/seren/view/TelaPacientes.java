@@ -6,12 +6,16 @@ package com.seren.view;
 
 import com.seren.controller.BuscarPacienteController;
 import com.seren.controller.BuscarPacientesController;
+import com.seren.controller.ExcluirPacienteController;
 import com.seren.model.Paciente;
 import com.seren.model.Usuario;
+import com.seren.util.DataUtil;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
@@ -33,9 +37,11 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
     BuscarPacientesController buscarPacientesController = new BuscarPacientesController();
     BuscarPacienteController buscarPacienteController = new BuscarPacienteController();
     private ArrayList<Document> listaPacientes = new ArrayList<>();
+    ExcluirPacienteController excluirPacienteController = new ExcluirPacienteController();
 
     private JPopupMenu menuPopup;
     private JMenuItem menuEditar;
+    private JMenuItem menuExcluir;
 
     public TelaPacientes(Usuario usuarioLogado) {
         initComponents();
@@ -51,11 +57,19 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
 
         listaPacientes = buscarPacientesController.buscarPacientes(usuario.getId());
         modelo.addColumn("Nome");
+        modelo.addColumn("Idade");
+        modelo.addColumn("Email");
 
         if (!listaPacientes.isEmpty()) {
             for (Document doc : listaPacientes) {
+                String nomePaciente = doc.getString("nome");
+                Date dataNascimento = doc.getDate("dataNascimento");
+                int idade = DataUtil.calcularIdade(dataNascimento);
+                String email = doc.getString("email");
                 modelo.addRow(new Object[]{
-                    doc.getString("nome")
+                    nomePaciente,
+                    idade,
+                    email
                 });
             }
         } else {
@@ -69,13 +83,21 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = new DefaultTableModel();
 
         modelo.addColumn("Nome");
+        modelo.addColumn("Idade");
+        modelo.addColumn("Email");
 
         listaPacientes = buscarPacienteController.buscarPacientes(usuario.getId(), nome);
 
         if (!listaPacientes.isEmpty()) {
             for (Document doc : listaPacientes) {
+                String nomePaciente = doc.getString("nome");
+                Date dataNascimento = doc.getDate("dataNascimento");
+                int idade = DataUtil.calcularIdade(dataNascimento);
+                String email = doc.getString("email");
                 modelo.addRow(new Object[]{
-                    doc.getString("nome")
+                    nomePaciente,
+                    idade,
+                    email
                 });
             }
         } else {
@@ -205,9 +227,13 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
 
         menuEditar = new JMenuItem("Editar");
 
+        menuExcluir = new JMenuItem("Excluir");
+
         menuPopup.add(menuEditar);
+        menuPopup.add(menuExcluir);
 
         menuEditar.addActionListener(e -> editarPacienteSelecionado());
+        menuExcluir.addActionListener(e -> excluirPacienteSelecionado());
 
     }
 
@@ -248,9 +274,33 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         }
     }
 
+    private void excluirPacienteSelecionado() {
+        int row = tabelaPacientes.getSelectedRow();
+        if (row >= 0 && row < listaPacientes.size()) {
+            Document docSelecionado = listaPacientes.get(row);
+            Paciente paciente = Paciente.pacienteDocumento(docSelecionado);
+
+            int resposta = JOptionPane.showConfirmDialog(
+                    null,
+                    "Deseja excluir o paciente " + paciente.getNome() + " ?",
+                    "Confirmar exclusão",
+                    JOptionPane.YES_NO_OPTION
+            );
+            if (resposta == JOptionPane.YES_OPTION) {
+                boolean sucesso = excluirPacienteController.excluirPaciente(paciente.getId());
+                if (sucesso) {
+                    JOptionPane.showMessageDialog(null, "Paciente excluído com sucesso.");
+                    carregarPacientesNaTabela();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir o paciente.");
+                }
+            }
+        }
+    }
+
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        TelaCadastrarPaciente cadastrarPaciente = new TelaCadastrarPaciente(this.usuario);
+        TelaCadastrarPaciente cadastrarPaciente = new TelaCadastrarPaciente(this.usuario, this);
         jDesktopPane2.add(cadastrarPaciente);
         cadastrarPaciente.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed

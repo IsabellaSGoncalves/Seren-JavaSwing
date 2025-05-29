@@ -11,6 +11,7 @@ com\seren\view\TelaEditarPaciente$1.class
 com\seren\view\Login.class
 com\seren\view\Cadastro$5.class
 com\seren\view\TelaEditarPaciente$4.class
+com\seren\controller\ExcluirPacienteController.class
 com\seren\controller\CriarPacienteController.class
 com\seren\view\TelaBuscarPaciente$1.class
 com\seren\view\Login$4.class
@@ -31,6 +32,7 @@ com\seren\view\Login$3.class
 com\seren\controller\BuscarPacienteController.class
 com\seren\controller\CadastroController.class
 com\seren\view\TelaEditarPaciente$2.class
+com\seren\util\DataUtil.class
 com\seren\util\MongoConnection.class
 com\seren\view\TelaPacientes$2.class
 com\seren\view\TelaCadastrarPaciente$2.class
