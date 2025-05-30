@@ -5,25 +5,21 @@
 package com.seren.controller;
 
 import com.seren.dao.PacienteDAO;
-import com.seren.model.Paciente;
-import java.util.ArrayList;
-import org.bson.Document;
 import org.bson.types.ObjectId;
 
 /**
  *
  * @author Pichau
  */
-public class BuscarPacientesController {
-    protected final PacienteDAO pacienteDAO;
+public class ExcluirPacienteController {
+        private final PacienteDAO pacienteDAO;
 
-    public BuscarPacientesController() {
+    public ExcluirPacienteController() {
         this.pacienteDAO = new PacienteDAO();
     }
     
-    public ArrayList<Document> buscarPacientes(ObjectId id){
-        ArrayList<Document> sucesso = pacienteDAO.buscarPaciente(id);
+    public boolean excluirPaciente(ObjectId id){
+        boolean sucesso = pacienteDAO.excluirPaciente(id);
         return sucesso;
     }
-
 }

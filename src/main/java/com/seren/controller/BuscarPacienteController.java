@@ -4,8 +4,6 @@
  */
 package com.seren.controller;
 
-import com.seren.dao.PacienteDAO;
-import com.seren.model.Paciente;
 import java.util.ArrayList;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -14,16 +12,10 @@ import org.bson.types.ObjectId;
  *
  * @author Pichau
  */
-public class BuscarPacientesController {
-    protected final PacienteDAO pacienteDAO;
-
-    public BuscarPacientesController() {
-        this.pacienteDAO = new PacienteDAO();
-    }
+public class BuscarPacienteController extends BuscarPacientesController {
     
-    public ArrayList<Document> buscarPacientes(ObjectId id){
-        ArrayList<Document> sucesso = pacienteDAO.buscarPaciente(id);
+     public ArrayList<Document> buscarPacientes(ObjectId id, String nome){
+        ArrayList<Document> sucesso = pacienteDAO.buscarPaciente(id, nome);
         return sucesso;
     }
-
 }

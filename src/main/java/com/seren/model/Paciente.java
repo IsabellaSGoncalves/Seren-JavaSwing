@@ -4,7 +4,10 @@
  */
 package com.seren.model;
 
+import com.seren.util.DataUtil;
 import java.util.Date;
+import org.bson.Document;
+import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
 
 /**
@@ -12,6 +15,7 @@ import org.bson.types.ObjectId;
  * @author Pichau
  */
 public class Paciente {
+    @BsonId
     private ObjectId id;
     private String nome;
     private String profissao;
@@ -23,6 +27,7 @@ public class Paciente {
     private Date dataNascimento;
     private ObjectId id_usuario;
 
+    // construtor para novo paciente
     public Paciente(String nome, String profissao, String genero, String estadoCivil, String telefone, 
     String email, String preferenciaContato, Date dataNascimento, ObjectId id_usuario) {
         this.id = new ObjectId();
@@ -36,6 +41,37 @@ public class Paciente {
         this.dataNascimento = dataNascimento;
         this.id_usuario = id_usuario;
     }
+    
+    // construtor para paciente vindo do banco
+    public Paciente(ObjectId id, String nome, String profissao, String genero, String estadoCivil, Long telefone, 
+    String email, String preferenciaContato, Date dataNascimento, ObjectId id_usuario) {
+        this.id = id;
+        this.nome = nome;
+        this.profissao = profissao;
+        this.genero = genero;
+        this.estadoCivil = estadoCivil;
+        this.telefone = telefone;
+        this.email = email;
+        this.preferenciaContato = preferenciaContato;
+        this.dataNascimento = dataNascimento;
+        this.id_usuario = id_usuario;
+    }
+    
+    // construtor para paciente que foi recebido como documento do banco
+    public static Paciente pacienteDocumento(Document doc) {
+    return new Paciente(
+        doc.getObjectId("_id"),              
+        doc.getString("nome"),
+        doc.getString("profissao"),
+        doc.getString("genero"),
+        doc.getString("estadoCivil"),
+        doc.getLong("telefone"),
+        doc.getString("email"),
+        doc.getString("preferenciaContato"),
+        doc.getDate("dataNascimento"),
+        doc.getObjectId("id_usuario")
+    );
+}
 
     public ObjectId getId() {
         return id;
@@ -112,5 +148,9 @@ public class Paciente {
         this.id_usuario = id_usuario;
     }
     
+    // método para retornar a idade com cálculo baseado na data de nascimento
+    public int getIdade() {
+        return DataUtil.calcularIdade(dataNascimento);
+    }
     
 }

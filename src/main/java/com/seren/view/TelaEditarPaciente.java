@@ -4,34 +4,45 @@
  */
 package com.seren.view;
 
-import com.seren.controller.CriarPacienteController;
+import com.seren.controller.AlterarPacienteController;
+import com.seren.model.Paciente;
 import com.seren.model.Usuario;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 
 /**
  *
  * @author Pichau
  */
-public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
+public class TelaEditarPaciente extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form CadastrarPaciente
+     * Creates new form NewJInternalFrame
      */
-    
-    private CriarPacienteController controller = new CriarPacienteController();
-    
-    public TelaCadastrarPaciente() {
+    public TelaEditarPaciente() {
         initComponents();
     }
+
+    private AlterarPacienteController controller = new AlterarPacienteController();
     private Usuario usuario;
+    private Paciente paciente;
     private TelaPacientes telaPacientes;
-    
-    public TelaCadastrarPaciente(Usuario usuarioLogado, TelaPacientes telaPacientes){
+
+    public TelaEditarPaciente(Usuario usuarioLogado, Paciente paciente, TelaPacientes telaPacientes) {
         initComponents();
         this.usuario = usuarioLogado;
+        this.paciente = paciente;
         this.telaPacientes = telaPacientes;
+        nomeInputEditarPaciente.setText(paciente.getNome());
+        profissaoInputEditarPaciente.setText(paciente.getProfissao());
+        generoInputEditarPaciente.setText(paciente.getGenero());
+        estadoCivilInputEditarPaciente.setText(paciente.getEstadoCivil());
+        telefoneInputEditarPaciente.setText(String.valueOf(paciente.getTelefone()));
+        emailInputEditarPaciente.setText(paciente.getEmail());
+        preferenciaContatoInputEditarPaciente.setText(paciente.getPreferenciaContato());
+        dataNascimentoInputEditarPaciente.setDate(paciente.getDataNascimento());
     }
 
     /**
@@ -44,12 +55,12 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        nomeInputCadastrarPaciente = new javax.swing.JTextField();
-        profissaoInputCadastrarPaciente = new javax.swing.JTextField();
-        generoInputCadastrarPaciente = new javax.swing.JTextField();
-        estadoCivilInputCadastrarPaciente = new javax.swing.JTextField();
-        emailInputCadastrarPaciente = new javax.swing.JTextField();
-        preferenciaContatoInputCadastrarPaciente = new javax.swing.JTextField();
+        nomeInputEditarPaciente = new javax.swing.JTextField();
+        profissaoInputEditarPaciente = new javax.swing.JTextField();
+        generoInputEditarPaciente = new javax.swing.JTextField();
+        estadoCivilInputEditarPaciente = new javax.swing.JTextField();
+        emailInputEditarPaciente = new javax.swing.JTextField();
+        preferenciaContatoInputEditarPaciente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -58,24 +69,19 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        dataNascimentoInputCadastrarPaciente = new com.toedter.calendar.JDateChooser();
-        telefoneInputCadastrarPaciente = new javax.swing.JFormattedTextField();
-        cadastrarPacientesButton = new javax.swing.JButton();
+        dataNascimentoInputEditarPaciente = new com.toedter.calendar.JDateChooser();
+        telefoneInputEditarPaciente = new javax.swing.JFormattedTextField();
+        editarPacientesButton = new javax.swing.JButton();
 
-        setMinimumSize(new java.awt.Dimension(700, 630));
-        setPreferredSize(new java.awt.Dimension(700, 630));
-
-        jPanel1.setPreferredSize(new java.awt.Dimension(700, 630));
-
-        nomeInputCadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
+        nomeInputEditarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeInputCadastrarPacienteActionPerformed(evt);
+                nomeInputEditarPacienteActionPerformed(evt);
             }
         });
 
-        preferenciaContatoInputCadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
+        preferenciaContatoInputEditarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                preferenciaContatoInputCadastrarPacienteActionPerformed(evt);
+                preferenciaContatoInputEditarPacienteActionPerformed(evt);
             }
         });
 
@@ -95,16 +101,16 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Preferência Contato");
 
-        telefoneInputCadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
+        telefoneInputEditarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telefoneInputCadastrarPacienteActionPerformed(evt);
+                telefoneInputEditarPacienteActionPerformed(evt);
             }
         });
 
-        cadastrarPacientesButton.setText("Cadastrar");
-        cadastrarPacientesButton.addActionListener(new java.awt.event.ActionListener() {
+        editarPacientesButton.setText("Editar");
+        editarPacientesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastrarPacientesButtonActionPerformed(evt);
+                editarPacientesButtonActionPerformed(evt);
             }
         });
 
@@ -115,22 +121,22 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(preferenciaContatoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(preferenciaContatoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(generoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(generoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(nomeInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nomeInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(telefoneInputCadastrarPaciente, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(telefoneInputEditarPaciente, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(108, 108, 108)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(emailInputCadastrarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                            .addComponent(estadoCivilInputCadastrarPaciente)
-                            .addComponent(profissaoInputCadastrarPaciente))
+                            .addComponent(emailInputEditarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(estadoCivilInputEditarPaciente)
+                            .addComponent(profissaoInputEditarPaciente))
                         .addGap(147, 147, 147))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,11 +147,11 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addComponent(dataNascimentoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dataNascimentoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(186, 186, 186)
-                .addComponent(cadastrarPacientesButton)
+                .addComponent(editarPacientesButton)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -157,16 +163,16 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(profissaoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nomeInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(profissaoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(generoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(estadoCivilInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(generoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(estadoCivilInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -174,23 +180,23 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(emailInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(emailInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(telefoneInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(telefoneInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dataNascimentoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dataNascimentoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(preferenciaContatoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
-                .addComponent(cadastrarPacientesButton)
+                        .addComponent(preferenciaContatoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(editarPacientesButton)
                 .addGap(15, 15, 15))
         );
 
@@ -213,59 +219,77 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void preferenciaContatoInputCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preferenciaContatoInputCadastrarPacienteActionPerformed
+    private void nomeInputEditarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeInputEditarPacienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_preferenciaContatoInputCadastrarPacienteActionPerformed
+    }//GEN-LAST:event_nomeInputEditarPacienteActionPerformed
 
-    private void cadastrarPacientesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarPacientesButtonActionPerformed
+    private void preferenciaContatoInputEditarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preferenciaContatoInputEditarPacienteActionPerformed
         // TODO add your handling code here:
-        String nome = nomeInputCadastrarPaciente.getText();
-        String profissao = profissaoInputCadastrarPaciente.getText();
-        String genero = generoInputCadastrarPaciente.getText();
-        String estadoCivil = estadoCivilInputCadastrarPaciente.getText();
-        String telefone = telefoneInputCadastrarPaciente.getText();
-        String email = emailInputCadastrarPaciente.getText();
-        String preferenciaContato = preferenciaContatoInputCadastrarPaciente.getText();
-        Date dataNascimento = dataNascimentoInputCadastrarPaciente.getDate();
-        ObjectId id_usuario = usuario.getId();
-        telefone = telefone.replaceAll("[^\\d]", "");
-        
-        if(nome.isEmpty() || profissao.isEmpty() || genero.isEmpty() || estadoCivil.isEmpty() || telefone.isEmpty() || email.isEmpty() || preferenciaContato.isEmpty()){
+    }//GEN-LAST:event_preferenciaContatoInputEditarPacienteActionPerformed
+
+    private void telefoneInputEditarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneInputEditarPacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telefoneInputEditarPacienteActionPerformed
+
+    private void editarPacientesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPacientesButtonActionPerformed
+        String nome = nomeInputEditarPaciente.getText();
+        String profissao = profissaoInputEditarPaciente.getText();
+        String genero = generoInputEditarPaciente.getText();
+        String estadoCivil = estadoCivilInputEditarPaciente.getText();
+        String telefone = telefoneInputEditarPaciente.getText();
+        String email = emailInputEditarPaciente.getText();
+        String preferenciaContato = preferenciaContatoInputEditarPaciente.getText();
+        Date dataNascimento = dataNascimentoInputEditarPaciente.getDate();
+
+        telefone = telefone.replaceAll("[^\\d]", ""); // remove tudo que não for número
+
+        if (nome.isEmpty() || profissao.isEmpty() || genero.isEmpty() || estadoCivil.isEmpty()
+                || telefone.isEmpty() || email.isEmpty() || preferenciaContato.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
             return;
-        } else if(!email.contains("@")){
+        } else if (!email.contains("@")) {
             JOptionPane.showMessageDialog(null, "Insira um email válido!");
             return;
-        } else if(telefone.length() < 11 || telefone.length() > 11) {
+        } else if (telefone.length() != 11) {
             JOptionPane.showMessageDialog(null, "Insira um número de telefone válido");
             return;
-        } 
-        
-        boolean sucesso = controller.criarPaciente(nome, profissao, genero, estadoCivil, telefone, email, preferenciaContato, dataNascimento, id_usuario);
-        if(sucesso){
-            JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
-            setVisible(false);
-            telaPacientes.carregarPacientesNaTabela();
-        } else {
-            JOptionPane.showMessageDialog(null, "Paciente já cadastrado anteriormente");
         }
-    }//GEN-LAST:event_cadastrarPacientesButtonActionPerformed
 
-    private void nomeInputCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeInputCadastrarPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeInputCadastrarPacienteActionPerformed
+        long telefoneNumero;
+        try {
+            telefoneNumero = Long.parseLong(telefone);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Número de telefone inválido.");
+            return;
+        }
 
-    private void telefoneInputCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneInputCadastrarPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefoneInputCadastrarPacienteActionPerformed
+        paciente.setNome(nome);
+        paciente.setProfissao(profissao);
+        paciente.setGenero(genero);
+        paciente.setEstadoCivil(estadoCivil);
+        paciente.setTelefone(telefoneNumero);
+        paciente.setEmail(email);
+        paciente.setPreferenciaContato(preferenciaContato);
+        paciente.setDataNascimento(dataNascimento);
+
+        boolean sucesso = controller.alterarPaciente(paciente);
+
+        if (sucesso) {
+            JOptionPane.showMessageDialog(null, "Paciente alterado com sucesso!");
+            telaPacientes.carregarPacientesNaTabela();
+            setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Insira dados novos.");
+        }
+    }//GEN-LAST:event_editarPacientesButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cadastrarPacientesButton;
-    private com.toedter.calendar.JDateChooser dataNascimentoInputCadastrarPaciente;
-    private javax.swing.JTextField emailInputCadastrarPaciente;
-    private javax.swing.JTextField estadoCivilInputCadastrarPaciente;
-    private javax.swing.JTextField generoInputCadastrarPaciente;
+    private com.toedter.calendar.JDateChooser dataNascimentoInputEditarPaciente;
+    private javax.swing.JButton editarPacientesButton;
+    private javax.swing.JTextField emailInputEditarPaciente;
+    private javax.swing.JTextField estadoCivilInputEditarPaciente;
+    private javax.swing.JTextField generoInputEditarPaciente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -275,9 +299,9 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField nomeInputCadastrarPaciente;
-    private javax.swing.JTextField preferenciaContatoInputCadastrarPaciente;
-    private javax.swing.JTextField profissaoInputCadastrarPaciente;
-    private javax.swing.JFormattedTextField telefoneInputCadastrarPaciente;
+    private javax.swing.JTextField nomeInputEditarPaciente;
+    private javax.swing.JTextField preferenciaContatoInputEditarPaciente;
+    private javax.swing.JTextField profissaoInputEditarPaciente;
+    private javax.swing.JFormattedTextField telefoneInputEditarPaciente;
     // End of variables declaration//GEN-END:variables
 }

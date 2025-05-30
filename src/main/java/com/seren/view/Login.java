@@ -105,7 +105,6 @@ public class Login extends javax.swing.JFrame {
         jPanel11.add(jLabel8);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Se conecte para gerenciar sua vida profissional ");
         jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanel11.add(jLabel7);
@@ -124,7 +123,7 @@ public class Login extends javax.swing.JFrame {
         cadastroButton1.setText("Cadastre-se");
         cadastroButton1.setToolTipText("");
         cadastroButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        cadastroButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastroButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastroButton1.setMinimumSize(new java.awt.Dimension(200, 40));
         cadastroButton1.setPreferredSize(new java.awt.Dimension(200, 40));
         cadastroButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +132,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LoginPlanta.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LoginCadastro/LoginPlanta.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -222,7 +221,7 @@ public class Login extends javax.swing.JFrame {
         loginButton.setToolTipText("");
         loginButton.setAlignmentY(0.0F);
         loginButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(1, 66, 158)));
-        loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         loginButton.setPreferredSize(new java.awt.Dimension(200, 40));
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,13 +232,11 @@ public class Login extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(255, 246, 248));
         jPanel5.setLayout(null);
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/e-mail.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LoginCadastro/icon/e-mail.png"))); // NOI18N
         jPanel5.add(jLabel12);
         jLabel12.setBounds(70, 34, 20, 20);
 
-        emailInputLogin.setBackground(new java.awt.Color(255, 255, 255));
         emailInputLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        emailInputLogin.setForeground(new java.awt.Color(0, 0, 0));
         emailInputLogin.setToolTipText("");
         emailInputLogin.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         emailInputLogin.setMargin(new java.awt.Insets(0, 30, 0, 10));
@@ -253,13 +250,12 @@ public class Login extends javax.swing.JFrame {
         jPanel5.add(emailInputLogin);
         emailInputLogin.setBounds(60, 30, 225, 30);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fechadura.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LoginCadastro/icon/fechadura.png"))); // NOI18N
         jLabel5.setFocusable(false);
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jPanel5.add(jLabel5);
         jLabel5.setBounds(70, 90, 20, 30);
 
-        senhaInputLogin.setBackground(new java.awt.Color(255, 255, 255));
         senhaInputLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         senhaInputLogin.setMargin(new java.awt.Insets(0, 30, 0, 10));
         senhaInputLogin.setNextFocusableComponent(loginButton);
@@ -268,14 +264,12 @@ public class Login extends javax.swing.JFrame {
         senhaInputLogin.setBounds(60, 90, 225, 30);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Senha");
         jPanel5.add(jLabel3);
         jLabel3.setBounds(60, 70, 34, 16);
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Email");
         jPanel5.add(jLabel2);
         jLabel2.setBounds(60, 10, 40, 16);
@@ -317,7 +311,7 @@ public class Login extends javax.swing.JFrame {
         jPanel9.setPreferredSize(new java.awt.Dimension(460, 160));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LoginMenor.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LoginCadastro/LoginMenor.png"))); // NOI18N
         jLabel4.setToolTipText("");
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 

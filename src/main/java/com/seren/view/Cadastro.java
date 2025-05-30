@@ -52,7 +52,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         senhaInputCadastro = new com.seren.components.RoundedJPasswordField(20);
         cadastroButton = new com.seren.components.RoundedButton(30);
-        jPasswordField1 = new com.seren.components.RoundedJPasswordField(20);
+        senhaConfirmarInputCadastro = new com.seren.components.RoundedJPasswordField(20);
         jLabel13 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -122,7 +122,6 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel6.add(jLabel4);
         jLabel4.setBounds(120, 230, 200, 15);
 
-        emailInputCadastro.setBackground(new java.awt.Color(255, 255, 255));
         emailInputCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         emailInputCadastro.setToolTipText("");
         emailInputCadastro.setMargin(new java.awt.Insets(0, 30, 0, 10));
@@ -136,9 +135,8 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel6.add(emailInputCadastro);
         emailInputCadastro.setBounds(120, 250, 230, 30);
 
-        usernameInputCadastro.setBackground(new java.awt.Color(255, 255, 255));
         usernameInputCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        usernameInputCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        usernameInputCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         usernameInputCadastro.setMargin(new java.awt.Insets(0, 30, 0, 10));
         usernameInputCadastro.setNextFocusableComponent(telefoneInputCadastro);
         usernameInputCadastro.setPreferredSize(new java.awt.Dimension(230, 30));
@@ -158,7 +156,6 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel6.add(jLabel5);
         jLabel5.setBounds(120, 170, 200, 15);
 
-        telefoneInputCadastro.setBackground(new java.awt.Color(255, 255, 255));
         telefoneInputCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         telefoneInputCadastro.setMargin(new java.awt.Insets(0, 30, 0, 10));
         telefoneInputCadastro.setNextFocusableComponent(senhaInputCadastro);
@@ -177,7 +174,6 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel6.add(jLabel2);
         jLabel2.setBounds(120, 290, 200, 15);
 
-        senhaInputCadastro.setBackground(new java.awt.Color(255, 255, 255));
         senhaInputCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         senhaInputCadastro.setMargin(new java.awt.Insets(0, 30, 0, 10));
         senhaInputCadastro.setNextFocusableComponent(cadastroButton);
@@ -189,7 +185,7 @@ public class Cadastro extends javax.swing.JFrame {
         cadastroButton.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         cadastroButton.setForeground(new java.awt.Color(255, 255, 255));
         cadastroButton.setText("Criar Conta");
-        cadastroButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastroButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cadastroButton.setMinimumSize(new java.awt.Dimension(200, 40));
         cadastroButton.setPreferredSize(new java.awt.Dimension(200, 40));
         cadastroButton.addActionListener(new java.awt.event.ActionListener() {
@@ -200,12 +196,11 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel6.add(cadastroButton);
         cadastroButton.setBounds(134, 420, 200, 40);
 
-        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPasswordField1.setMargin(new java.awt.Insets(0, 30, 0, 10));
-        jPasswordField1.setPreferredSize(new java.awt.Dimension(230, 30));
-        jPanel6.add(jPasswordField1);
-        jPasswordField1.setBounds(120, 370, 230, 30);
+        senhaConfirmarInputCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        senhaConfirmarInputCadastro.setMargin(new java.awt.Insets(0, 30, 0, 10));
+        senhaConfirmarInputCadastro.setPreferredSize(new java.awt.Dimension(230, 30));
+        jPanel6.add(senhaConfirmarInputCadastro);
+        senhaConfirmarInputCadastro.setBounds(120, 370, 230, 30);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setText("Confirmação de senha");
@@ -219,7 +214,7 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel9.setFocusable(false);
         jPanel9.setPreferredSize(new java.awt.Dimension(460, 158));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LoginMenorFlip.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LoginCadastro/LoginMenorFlip.png"))); // NOI18N
         jLabel12.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -286,7 +281,7 @@ public class Cadastro extends javax.swing.JFrame {
         LoginButton1.setForeground(new java.awt.Color(1, 66, 158));
         LoginButton1.setText("Logar-se");
         LoginButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        LoginButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LoginButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         LoginButton1.setMinimumSize(new java.awt.Dimension(200, 40));
         LoginButton1.setPreferredSize(new java.awt.Dimension(200, 40));
         LoginButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -295,7 +290,7 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LoginPlantaFlip.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LoginCadastro/LoginPlantaFlip.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -364,7 +359,9 @@ public class Cadastro extends javax.swing.JFrame {
         String username = usernameInputCadastro.getText();
         String email = emailInputCadastro.getText();
         String telefone = telefoneInputCadastro.getText();
-        String senha = senhaInputCadastro.getText();
+        String senha = new String(senhaInputCadastro.getPassword());
+        String senhaConfirmar = new String (senhaConfirmarInputCadastro.getPassword());
+        
 
         if (email == null || email.isEmpty() || senha == null || senha.isEmpty() || telefone == null || telefone.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
@@ -372,6 +369,11 @@ public class Cadastro extends javax.swing.JFrame {
         }
         if (senha.length() > 0 && senha.length() < 8 || !senha.matches(".*[!@#$%^&*()_+=|<>?{}\\[\\]~-].*") || !senha.matches(".*\\d.*")) {
             JOptionPane.showMessageDialog(null, "Insira uma senha com pelo menos 8 digitos, caractere especial e números!");
+            return;
+        }
+        
+        if (!senhaConfirmar.equals(senha)){
+            JOptionPane.showMessageDialog(null, "Senha não coincidem!");
             return;
         }
 
@@ -382,7 +384,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         telefone = telefone.replaceAll("[^\\d]", "");
 
-        if (telefone.length() < 11 || telefone.length() > 11) {
+        if (telefone.length() != 11) {
             JOptionPane.showMessageDialog(null, "Insira um número de telefone válido");
             return;
         }
@@ -402,6 +404,7 @@ public class Cadastro extends javax.swing.JFrame {
         emailInputCadastro.setText("");
         telefoneInputCadastro.setText("");
         senhaInputCadastro.setText("");
+        senhaConfirmarInputCadastro.setText("");
     }//GEN-LAST:event_cadastroButtonActionPerformed
 
     private void telefoneInputCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneInputCadastroActionPerformed
@@ -480,7 +483,7 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField senhaConfirmarInputCadastro;
     private javax.swing.JPasswordField senhaInputCadastro;
     private javax.swing.JTextField telefoneInputCadastro;
     private javax.swing.JTextField usernameInputCadastro;
