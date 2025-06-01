@@ -11,6 +11,8 @@ com\seren\controller\LoginController.class
 com\seren\view\TelaInicial$5.class
 com\seren\view\TelaEditarPaciente$1.class
 com\seren\view\Login.class
+com\seren\util\ValidadorDadosPaciente.class
+com\seren\util\Validador.class
 com\seren\view\Cadastro$5.class
 com\seren\view\TelaEditarPaciente$4.class
 com\seren\controller\ExcluirPacienteController.class
@@ -23,6 +25,7 @@ com\seren\util\ConfigUtil.class
 com\seren\view\TelaInicial$4.class
 com\seren\dao\UsuarioDAO.class
 com\seren\model\Usuario.class
+com\seren\util\ValidadorDadosUsuario.class
 com\seren\view\Login$2.class
 com\seren\controller\AlterarPacienteController.class
 com\seren\dao\PacienteDAO.class
@@ -42,6 +45,7 @@ com\seren\util\MongoConnection.class
 com\seren\view\TelaPacientes$2.class
 com\seren\view\TelaCadastrarPaciente$2.class
 com\seren\components\RoundedJPasswordField.class
+com\seren\util\ValidadorDadosUsuarioLogin.class
 com\seren\view\TelaCadastrarPaciente$4.class
 com\seren\model\Paciente.class
 com\seren\controller\BuscarPacientesController.class

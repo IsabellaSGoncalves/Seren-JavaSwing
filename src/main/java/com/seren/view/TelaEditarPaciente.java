@@ -7,6 +7,7 @@ package com.seren.view;
 import com.seren.controller.AlterarPacienteController;
 import com.seren.model.Paciente;
 import com.seren.model.Usuario;
+import com.seren.util.ValidadorDadosPaciente;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import org.bson.Document;
@@ -240,29 +241,17 @@ public class TelaEditarPaciente extends javax.swing.JInternalFrame {
         String email = emailInputEditarPaciente.getText();
         String preferenciaContato = preferenciaContatoInputEditarPaciente.getText();
         Date dataNascimento = dataNascimentoInputEditarPaciente.getDate();
-
-        telefone = telefone.replaceAll("[^\\d]", ""); // remove tudo que não for número
-
-        if (nome.isEmpty() || profissao.isEmpty() || genero.isEmpty() || estadoCivil.isEmpty()
-                || telefone.isEmpty() || email.isEmpty() || preferenciaContato.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
-            return;
-        } else if (!email.contains("@")) {
-            JOptionPane.showMessageDialog(null, "Insira um email válido!");
-            return;
-        } else if (telefone.length() != 11) {
-            JOptionPane.showMessageDialog(null, "Insira um número de telefone válido");
+        
+        ValidadorDadosPaciente validador = new ValidadorDadosPaciente(nome, profissao, genero, estadoCivil, telefone, email, preferenciaContato, dataNascimento);
+        String erro = validador.validar();    
+        
+        if(erro != null ){
+           JOptionPane.showMessageDialog(null, erro);
             return;
         }
-
-        long telefoneNumero;
-        try {
-            telefoneNumero = Long.parseLong(telefone);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Número de telefone inválido.");
-            return;
-        }
-
+        
+        long telefoneNumero = validador.getTelefone();
+        
         paciente.setNome(nome);
         paciente.setProfissao(profissao);
         paciente.setGenero(genero);

@@ -6,6 +6,7 @@ package com.seren.view;
 
 import com.seren.controller.LoginController;
 import com.seren.model.Usuario;
+import com.seren.util.ValidadorDadosUsuarioLogin;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -362,13 +363,12 @@ public class Login extends javax.swing.JFrame {
         String email = emailInputLogin.getText();
         String senha = new String(senhaInputLogin.getPassword());
 
-        if (email == null || email.isEmpty() || senha == null || senha.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
-            return;
-        }
-        if (!email.contains("@")) {
-            JOptionPane.showMessageDialog(null, "Insira um email válido!");
-            return;
+        ValidadorDadosUsuarioLogin validador = new ValidadorDadosUsuarioLogin(email, senha);
+        String erro = validador.validar();
+        
+        if(erro != null){
+            JOptionPane.showMessageDialog(null, erro);
+            return;    
         }
 
         Usuario usuarioLogado = controller.loginUsuario(email, senha);
