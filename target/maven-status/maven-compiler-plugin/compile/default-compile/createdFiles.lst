@@ -13,7 +13,6 @@ com\seren\view\TelaEditarPaciente$1.class
 com\seren\view\Login.class
 com\seren\util\ValidadorDadosPaciente.class
 com\seren\util\Validador.class
-com\seren\view\Cadastro$5.class
 com\seren\view\TelaEditarPaciente$4.class
 com\seren\controller\ExcluirPacienteController.class
 com\seren\controller\CriarPacienteController.class
@@ -21,6 +20,7 @@ com\seren\view\TelaBuscarPaciente$1.class
 com\seren\view\Login$4.class
 com\seren\view\Cadastro$3.class
 com\seren\view\TelaInicial$2.class
+com\seren\components\RoundedJFormattedTextField.class
 com\seren\util\ConfigUtil.class
 com\seren\view\TelaInicial$4.class
 com\seren\dao\UsuarioDAO.class
