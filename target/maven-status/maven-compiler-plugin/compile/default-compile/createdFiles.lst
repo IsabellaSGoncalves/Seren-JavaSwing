@@ -26,7 +26,9 @@ com\seren\view\TelaInicial$4.class
 com\seren\dao\UsuarioDAO.class
 com\seren\model\Usuario.class
 com\seren\util\ValidadorDadosUsuario.class
+com\seren\util\LembrarEmailUtil.class
 com\seren\view\Login$2.class
+com\seren\view\Login$5.class
 com\seren\controller\AlterarPacienteController.class
 com\seren\dao\PacienteDAO.class
 com\seren\view\TelaPacientes$1.class

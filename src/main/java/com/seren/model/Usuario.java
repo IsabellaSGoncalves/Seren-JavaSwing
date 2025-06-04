@@ -11,8 +11,13 @@ import org.bson.types.ObjectId;
  *
  * @author Pichau
  */
-public class Usuario {
 
+// Classe Usuario que representa a entidade Usuário armazenada como documento no MongoDB. 
+// Demonstrando encapsulamento através de atributos privados com getters e setters.
+public class Usuario {
+    
+    // Atributos essenciais para a identificação e login do usuário.
+    // Marcação que indica que este id se trata do ObjectId localizado no banco de dados.
     @BsonId
     private ObjectId id;
     private String nome;
@@ -20,7 +25,7 @@ public class Usuario {
     private long telefone;
     private String senha;
     
-    // construtor para criar novo usuário 
+    // Construtor para criar um novo usuário, com a criação de um novo id e formatação do telefone. 
     public Usuario(String nome, String email, String telefone, String senha) {
         this.id = new ObjectId();
         this.nome = nome;
@@ -29,7 +34,7 @@ public class Usuario {
         this.senha = senha;
     }
     
-    // construtor para usuário vindo do banco
+    // Construtor para usuário vindo do banco.
     public Usuario(ObjectId id, String nome, String email, long telefone, String senha) {
         this.id = id;
         this.nome = nome;
@@ -37,7 +42,8 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
     }
-
+    
+    // Getters e Setters
     public ObjectId getId() {
         return id;
     }

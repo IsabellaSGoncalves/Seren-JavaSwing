@@ -21,7 +21,7 @@ public class PacienteDAO {
     private final MongoCollection<Document> collection;
 
     public PacienteDAO() {
-        MongoDatabase db = MongoConnection.getDatabase();
+        MongoDatabase db = MongoConnection.getInstancia().getDatabase();
         this.collection = db.getCollection("Paciente");
     }
 

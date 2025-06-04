@@ -9,6 +9,7 @@ import com.seren.model.Usuario;
 import com.seren.util.ValidadorDadosUsuarioLogin;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import com.seren.util.LembrarEmailUtil;
 
 /**
  *
@@ -25,6 +26,8 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/iconLogo.png")).getImage());
         setResizable(false);
+        setLocationRelativeTo(null);
+
 //      labelLogingotoCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
 //        public void mouseClicked(java.awt.event.MouseEvent evt) {
 //           
@@ -37,6 +40,14 @@ public class Login extends javax.swing.JFrame {
 //
 //    
 //    labelLogingotoCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        if (LembrarEmailUtil.temEmailGuardado()) {
+            emailInputLogin.setText(LembrarEmailUtil.getEmailGuardado());
+            jCheckBox1.setSelected(true);
+        } else {
+            emailInputLogin.setText("");
+            jCheckBox1.setSelected(false);
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -214,6 +225,11 @@ public class Login extends javax.swing.JFrame {
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(1, 66, 158));
         jCheckBox1.setText("Lembre de mim");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         loginButton.setBackground(new java.awt.Color(1, 66, 158));
         loginButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -365,17 +381,25 @@ public class Login extends javax.swing.JFrame {
 
         ValidadorDadosUsuarioLogin validador = new ValidadorDadosUsuarioLogin(email, senha);
         String erro = validador.validar();
-        
-        if(erro != null){
+
+        if (erro != null) {
             JOptionPane.showMessageDialog(null, erro);
-            return;    
+            return;
         }
 
         Usuario usuarioLogado = controller.loginUsuario(email, senha);
 
         if (usuarioLogado != null) {
+
+            if (jCheckBox1.isSelected()) {
+                LembrarEmailUtil.salvarEmail(email);
+            } else {
+                LembrarEmailUtil.excluirEmail();
+            }
+
             JOptionPane.showMessageDialog(null, "Login com sucesso!");
-            TelaInicial paginaInicial = new TelaInicial(usuarioLogado);
+            boolean lembrar = jCheckBox1.isSelected();
+            TelaInicial paginaInicial = new TelaInicial(usuarioLogado, lembrar);
             paginaInicial.setVisible(true);
             setVisible(false);
 
@@ -389,6 +413,13 @@ public class Login extends javax.swing.JFrame {
     private void emailInputLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailInputLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emailInputLoginActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+        if (!jCheckBox1.isSelected()) {
+            LembrarEmailUtil.excluirEmail();
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -14,7 +14,12 @@ import org.bson.types.ObjectId;
  *
  * @author Pichau
  */
+// Classe Paciente que representa a entidade Paciente armazenada como documento no MongoDB. 
+// Demonstrando encapsulamento através de atributos privados com getters e setters.
 public class Paciente {
+    
+    // Atributos essenciais para o cadastro de um paciente.
+    // Marcação que indica que este id se trata do ObjectId localizado no banco de dados.
     @BsonId
     private ObjectId id;
     private String nome;
@@ -27,7 +32,7 @@ public class Paciente {
     private Date dataNascimento;
     private ObjectId id_usuario;
 
-    // construtor para novo paciente
+    // Construtor para novo paciente, com a criação de um novo id e formatação do telefone. .
     public Paciente(String nome, String profissao, String genero, String estadoCivil, String telefone, 
     String email, String preferenciaContato, Date dataNascimento, ObjectId id_usuario) {
         this.id = new ObjectId();
@@ -42,7 +47,7 @@ public class Paciente {
         this.id_usuario = id_usuario;
     }
     
-    // construtor para paciente vindo do banco
+    // Construtor para paciente vindo do banco.
     public Paciente(ObjectId id, String nome, String profissao, String genero, String estadoCivil, Long telefone, 
     String email, String preferenciaContato, Date dataNascimento, ObjectId id_usuario) {
         this.id = id;
@@ -57,7 +62,7 @@ public class Paciente {
         this.id_usuario = id_usuario;
     }
     
-    // construtor para paciente que foi recebido como documento do banco
+    // Construtor para paciente que foi recebido como documento pelo banco de dados.
     public static Paciente pacienteDocumento(Document doc) {
     return new Paciente(
         doc.getObjectId("_id"),              
@@ -73,6 +78,7 @@ public class Paciente {
     );
 }
 
+    // Getters e Setters
     public ObjectId getId() {
         return id;
     }
@@ -148,7 +154,7 @@ public class Paciente {
         this.id_usuario = id_usuario;
     }
     
-    // método para retornar a idade com cálculo baseado na data de nascimento
+    // Método para retornar a idade com cálculo baseado na data de nascimento.
     public int getIdade() {
         return DataUtil.calcularIdade(dataNascimento);
     }
