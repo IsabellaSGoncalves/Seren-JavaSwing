@@ -7,7 +7,8 @@ import com.mongodb.client.MongoDatabase;
 // Classe utilitária MongoConnection onde é possível a conexão com o banco de dados.
 public class MongoConnection {
 
-    // Conseguindo o nome da nossa database e a URI guardados na config.properties com o auxílio da nossa classe utilitária ConfigUtil.
+    // Conseguindo o nome da nossa database e a URI guardados na config.properties 
+    // com o auxílio da nossa classe utilitária ConfigUtil.
     private static final String URI = ConfigUtil.get("mongodb.uri");
     private static final String DATABASE_NOME = ConfigUtil.get("mongodb.database");
 
@@ -22,7 +23,8 @@ public class MongoConnection {
         mongoClient = MongoClients.create(URI);
     }
 
-    // Método get que retorna instância única da conexão, garantindo reutilização e evitando múltiplas conexões desnecessárias com o banco de dados.
+    // Getter que retorna instância única da conexão, garantindo reutilização 
+    // e evitando múltiplas conexões desnecessárias com o banco de dados.
     public static synchronized MongoConnection getInstancia() {
         if (instancia == null) {
             instancia = new MongoConnection();
@@ -34,7 +36,7 @@ public class MongoConnection {
     public MongoDatabase getDatabase() {
         return mongoClient.getDatabase(DATABASE_NOME);
     }
-    
+
     // Método que encerra a conexão com o banco e limpa a instância. 
     public void close() {
         mongoClient.close();

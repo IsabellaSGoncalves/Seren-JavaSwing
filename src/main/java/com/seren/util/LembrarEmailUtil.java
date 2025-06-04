@@ -9,10 +9,10 @@ import java.util.Properties;
 // Classe utilitária responsável por guardar e recuperar o email do usuário.
 // Isso é usado para que a funcionalidade "lembrar de mim" seja concretizada.
 public class LembrarEmailUtil {
-    
+
     // Caminho do arquivo onde as propriedades vão ser salvas.
     private static final String localArquivo = "lembrarEmail.properties";
-    
+
     // Objeto Properties utilizado para armazenar as propriedades carregadas.
     private static final Properties props = new Properties();
 
@@ -31,7 +31,7 @@ public class LembrarEmailUtil {
                 // Carrega os dados do arquivo para o objeto props.
                 props.load(input);
             } catch (IOException e) {
-                e.printStackTrace(); 
+                e.printStackTrace();
             }
         }
     }
@@ -39,21 +39,21 @@ public class LembrarEmailUtil {
     // Método que salva o email informado no arquivo .properties.
     // Também marca que o email deve ser lembrado, salvando "lembrarEmail" como "true".
     public static void salvarEmail(String email) {
-        props.setProperty("lembrarEmail", "true"); 
-        props.setProperty("email", email);         
+        props.setProperty("lembrarEmail", "true");
+        props.setProperty("email", email);
 
         // Grava as informações no arquivo juntamente com um comentário.
         try (FileOutputStream emailGuardado = new FileOutputStream(localArquivo)) {
-            props.store(emailGuardado, "EmailGuardado"); 
+            props.store(emailGuardado, "EmailGuardado");
         } catch (IOException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
     }
 
     // Método que retorna o email guardado, mas só se a opção "lembrarEmail" estiver marcada como "true".
     public static String getEmailGuardado() {
         // Garante que o arquivo foi carregado na memória antes de buscar.
-        carregarArquivo(); 
+        carregarArquivo();
 
         if ("true".equals(props.getProperty("lembrarEmail"))) {
             return props.getProperty("email", "");
@@ -66,16 +66,16 @@ public class LembrarEmailUtil {
     public static void excluirEmail() {
         File arquivo = new File(localArquivo);
         if (arquivo.exists()) {
-            arquivo.delete(); 
+            arquivo.delete();
         }
 
-        props.clear(); 
+        props.clear();
     }
 
     // Verifica se existe um email salvo e se a opção de lembrar está ativada.
     public static boolean temEmailGuardado() {
         // Garante que os dados estejam carregados.
-        carregarArquivo(); 
+        carregarArquivo();
         String lembrar = props.getProperty("lembrarEmail");
         String email = props.getProperty("email");
 
