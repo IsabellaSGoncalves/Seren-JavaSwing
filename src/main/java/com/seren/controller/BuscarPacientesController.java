@@ -5,7 +5,6 @@
 package com.seren.controller;
 
 import com.seren.dao.PacienteDAO;
-import com.seren.model.Paciente;
 import java.util.ArrayList;
 import org.bson.Document;
 import org.bson.types.ObjectId;

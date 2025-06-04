@@ -20,7 +20,7 @@ public class UsuarioDAO {
     private final MongoCollection<Document> collection;
 
     public UsuarioDAO() {
-        MongoDatabase db = MongoConnection.getDatabase();
+        MongoDatabase db = MongoConnection.getInstancia().getDatabase();
         this.collection = db.getCollection("Usuario");
     }
 

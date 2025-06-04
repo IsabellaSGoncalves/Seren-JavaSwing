@@ -16,7 +16,12 @@ C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\model\U
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\Seren.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\util\ConfigUtil.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\util\DataUtil.java
+C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\util\LembrarEmailUtil.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\util\MongoConnection.java
+C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\util\Validador.java
+C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\util\ValidadorDadosPaciente.java
+C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\util\ValidadorDadosUsuario.java
+C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\util\ValidadorDadosUsuarioLogin.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\view\Cadastro.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\view\Login.java
 C:\Users\Pichau\Documents\NetBeansProjects\Seren\src\main\java\com\seren\view\TelaBuscarPaciente.java

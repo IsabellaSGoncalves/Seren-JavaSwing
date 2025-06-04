@@ -5,6 +5,7 @@
 package com.seren.view;
 
 import com.seren.controller.CadastroController;
+import com.seren.util.ValidadorDadosUsuario;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -360,35 +361,16 @@ public class Cadastro extends javax.swing.JFrame {
         String email = emailInputCadastro.getText();
         String telefone = telefoneInputCadastro.getText();
         String senha = new String(senhaInputCadastro.getPassword());
-        String senhaConfirmar = new String (senhaConfirmarInputCadastro.getPassword());
-        
+        String senhaConfirmar = new String(senhaConfirmarInputCadastro.getPassword());
 
-        if (email == null || email.isEmpty() || senha == null || senha.isEmpty() || telefone == null || telefone.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
-            return;
-        }
-        if (senha.length() > 0 && senha.length() < 8 || !senha.matches(".*[!@#$%^&*()_+=|<>?{}\\[\\]~-].*") || !senha.matches(".*\\d.*")) {
-            JOptionPane.showMessageDialog(null, "Insira uma senha com pelo menos 8 digitos, caractere especial e números!");
+        ValidadorDadosUsuario validador = new ValidadorDadosUsuario(username, email, telefone, senha, senhaConfirmar);
+        String erro = validador.validar();
+
+        if (erro != null) {
+            JOptionPane.showMessageDialog(null, erro);
             return;
         }
         
-        if (!senhaConfirmar.equals(senha)){
-            JOptionPane.showMessageDialog(null, "Senha não coincidem!");
-            return;
-        }
-
-        if (!email.contains("@")) {
-            JOptionPane.showMessageDialog(null, "Insira um email válido!");
-            return;
-        }
-
-        telefone = telefone.replaceAll("[^\\d]", "");
-
-        if (telefone.length() != 11) {
-            JOptionPane.showMessageDialog(null, "Insira um número de telefone válido");
-            return;
-        }
-
         boolean sucesso = controller.cadastrarUsuario(username, email, telefone, senha);
 
         if (sucesso) {

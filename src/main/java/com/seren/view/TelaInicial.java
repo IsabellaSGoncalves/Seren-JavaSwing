@@ -8,6 +8,7 @@ import com.seren.model.Usuario;
 import javax.swing.ImageIcon;
 import com.seren.components.RoundedPanel;
 import javax.swing.JOptionPane;
+import com.seren.util.LembrarEmailUtil;
 
 /**
  *
@@ -27,10 +28,12 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     private Usuario usuario;
+    private boolean lembrarEmail;
 
-    public TelaInicial(Usuario usuarioLogado) {
+    public TelaInicial(Usuario usuarioLogado, boolean lembrarEmail) {
         initComponents();
         this.usuario = usuarioLogado;
+        this.lembrarEmail = lembrarEmail;
         exibirSaudacao();
 
         labelSerengotoInitialScreen.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -50,6 +53,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
         labelSairgotoLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (!lembrarEmail) {
+                    LembrarEmailUtil.excluirEmail();
+                }
 
                 Login login = new Login();
                 JOptionPane.showMessageDialog(null, "Sessão encerrada!");
@@ -320,7 +326,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private void pacientesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacientesButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pacientesButton1ActionPerformed
-
 
     /**
      * @param args the command line arguments

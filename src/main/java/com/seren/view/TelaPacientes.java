@@ -50,7 +50,6 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
     private JMenuItem menuEditar;
     private JMenuItem menuExcluir;
 
-
     public TelaPacientes(Usuario usuarioLogado) {
         initComponents();
         this.usuario = usuarioLogado;
@@ -58,46 +57,27 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         this.setBorder(null);
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
-                criarMenuPopup();
+        criarMenuPopup();
         adicionarListenerTabela();
         carregarPacientesNaTabela();
     }
 
     public void carregarPacientesNaTabela() {
-        DefaultTableModel modelo = new DefaultTableModel();
-
-        listaPacientes = buscarPacientesController.buscarPacientes(usuario.getId());
-        modelo.addColumn("Nome");
-        modelo.addColumn("Idade");
-        modelo.addColumn("Email");
-
-        if (!listaPacientes.isEmpty()) {
-            for (Document doc : listaPacientes) {
-                String nomePaciente = doc.getString("nome");
-                Date dataNascimento = doc.getDate("dataNascimento");
-                int idade = DataUtil.calcularIdade(dataNascimento);
-                String email = doc.getString("email");
-                modelo.addRow(new Object[]{
-                    nomePaciente,
-                    idade,
-                    email
-                });
-            }
-        } else {
-            modelo.addRow(new Object[]{"Nenhum paciente encontrado"});
-        }
-
-        tabelaPacientes.setModel(modelo);
+        carregarPacientesNaTabela(null);
     }
 
-    public void filtrarTabela(String nome) {
+    public void carregarPacientesNaTabela(String filtroNome) {
         DefaultTableModel modelo = new DefaultTableModel();
 
         modelo.addColumn("Nome");
         modelo.addColumn("Idade");
         modelo.addColumn("Email");
 
-        listaPacientes = buscarPacienteController.buscarPacientes(usuario.getId(), nome);
+        if (filtroNome == null || filtroNome.isEmpty()) {
+            listaPacientes = buscarPacientesController.buscarPacientes(usuario.getId());
+        } else {
+            listaPacientes = buscarPacienteController.buscarPacientes(usuario.getId(), filtroNome);
+        }
 
         if (!listaPacientes.isEmpty()) {
             for (Document doc : listaPacientes) {
@@ -105,14 +85,10 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
                 Date dataNascimento = doc.getDate("dataNascimento");
                 int idade = DataUtil.calcularIdade(dataNascimento);
                 String email = doc.getString("email");
-                modelo.addRow(new Object[]{
-                    nomePaciente,
-                    idade,
-                    email
-                });
+                modelo.addRow(new Object[]{nomePaciente, idade, email});
             }
         } else {
-            modelo.addRow(new Object[]{"Nenhum paciente encontrado"});
+            modelo.addRow(new Object[]{"Nenhum paciente encontrado", "", ""});
         }
 
         tabelaPacientes.setModel(modelo);

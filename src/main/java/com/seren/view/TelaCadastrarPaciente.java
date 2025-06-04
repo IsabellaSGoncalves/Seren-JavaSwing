@@ -6,6 +6,7 @@ package com.seren.view;
 
 import com.seren.controller.CriarPacienteController;
 import com.seren.model.Usuario;
+import com.seren.util.ValidadorDadosPaciente;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import org.bson.types.ObjectId;
@@ -144,7 +145,7 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
                             .addComponent(dataNascimentoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(186, 186, 186)
+                .addGap(178, 178, 178)
                 .addComponent(cadastrarPacientesButton)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -189,9 +190,9 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(preferenciaContatoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
-                .addComponent(cadastrarPacientesButton)
-                .addGap(15, 15, 15))
+                .addGap(116, 116, 116)
+                .addComponent(cadastrarPacientesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -228,20 +229,17 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
         String preferenciaContato = preferenciaContatoInputCadastrarPaciente.getText();
         Date dataNascimento = dataNascimentoInputCadastrarPaciente.getDate();
         ObjectId id_usuario = usuario.getId();
-        telefone = telefone.replaceAll("[^\\d]", "");
         
-        if(nome.isEmpty() || profissao.isEmpty() || genero.isEmpty() || estadoCivil.isEmpty() || telefone.isEmpty() || email.isEmpty() || preferenciaContato.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
+        ValidadorDadosPaciente validador = new ValidadorDadosPaciente(nome, profissao, genero, estadoCivil, telefone, email, preferenciaContato, dataNascimento);
+        String erro = validador.validar();
+        
+        if(erro != null){
+            JOptionPane.showMessageDialog(null, erro);
             return;
-        } else if(!email.contains("@")){
-            JOptionPane.showMessageDialog(null, "Insira um email válido!");
-            return;
-        } else if(telefone.length() < 11 || telefone.length() > 11) {
-            JOptionPane.showMessageDialog(null, "Insira um número de telefone válido");
-            return;
-        } 
+        }
         
         boolean sucesso = controller.criarPaciente(nome, profissao, genero, estadoCivil, telefone, email, preferenciaContato, dataNascimento, id_usuario);
+        
         if(sucesso){
             JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
             setVisible(false);
