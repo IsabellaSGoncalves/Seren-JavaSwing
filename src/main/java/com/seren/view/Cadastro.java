@@ -359,10 +359,12 @@ public class Cadastro extends javax.swing.JFrame {
     private void cadastroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroButtonActionPerformed
         String username = usernameInputCadastro.getText();
         String email = emailInputCadastro.getText();
-        String telefone = telefoneInputCadastro.getText();
+        String telefoneFormatado = telefoneInputCadastro.getText();
         String senha = new String(senhaInputCadastro.getPassword());
         String senhaConfirmar = new String(senhaConfirmarInputCadastro.getPassword());
-
+        
+        String telefone = telefoneFormatado.replaceAll("[^\\d]", "");
+        
         ValidadorDadosUsuario validador = new ValidadorDadosUsuario(username, email, telefone, senha, senhaConfirmar);
         String erro = validador.validar();
 
