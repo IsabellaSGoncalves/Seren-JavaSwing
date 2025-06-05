@@ -10,6 +10,7 @@ import com.seren.model.Usuario;
 import com.seren.util.ValidadorDadosPaciente;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -24,6 +25,7 @@ public class TelaEditarPaciente extends javax.swing.JInternalFrame {
      */
     public TelaEditarPaciente() {
         initComponents();
+        setResizable(false);
     }
 
     private AlterarPacienteController controller = new AlterarPacienteController();
@@ -36,6 +38,11 @@ public class TelaEditarPaciente extends javax.swing.JInternalFrame {
         this.usuario = usuarioLogado;
         this.paciente = paciente;
         this.telaPacientes = telaPacientes;
+
+        //tirando a borda de uma tela separada
+        BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
+        ui.setNorthPane(null);
+
         nomeInputEditarPaciente.setText(paciente.getNome());
         profissaoInputEditarPaciente.setText(paciente.getProfissao());
         generoInputEditarPaciente.setText(paciente.getGenero());
@@ -56,12 +63,12 @@ public class TelaEditarPaciente extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        nomeInputEditarPaciente = new javax.swing.JTextField();
-        profissaoInputEditarPaciente = new javax.swing.JTextField();
-        generoInputEditarPaciente = new javax.swing.JTextField();
-        estadoCivilInputEditarPaciente = new javax.swing.JTextField();
-        emailInputEditarPaciente = new javax.swing.JTextField();
-        preferenciaContatoInputEditarPaciente = new javax.swing.JTextField();
+        nomeInputEditarPaciente = new com.seren.components.RoundedJFormattedTextField(20);
+        profissaoInputEditarPaciente = new com.seren.components.RoundedJFormattedTextField(20);
+        generoInputEditarPaciente = new com.seren.components.RoundedJFormattedTextField(20);
+        estadoCivilInputEditarPaciente = new com.seren.components.RoundedJFormattedTextField(20);
+        emailInputEditarPaciente = new com.seren.components.RoundedJFormattedTextField(20);
+        preferenciaContatoInputEditarPaciente = new com.seren.components.RoundedJFormattedTextField(20);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -70,135 +77,195 @@ public class TelaEditarPaciente extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        dataNascimentoInputEditarPaciente = new com.toedter.calendar.JDateChooser();
-        telefoneInputEditarPaciente = new javax.swing.JFormattedTextField();
-        editarPacientesButton = new javax.swing.JButton();
+        dataNascimentoInputEditarPaciente = new com.seren.components.RoundedJDateChooser(20);
+        btnCancelarEdicao = new com.seren.components.RoundedButton(30);
+        btnEditarPacientes = new com.seren.components.RoundedButton(30);
+        jLabel9 = new javax.swing.JLabel();
+        telefoneInputEditarPaciente = new com.seren.components.RoundedJFormattedTextField(30);
 
-        nomeInputEditarPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeInputEditarPacienteActionPerformed(evt);
-            }
-        });
+        setBackground(new java.awt.Color(102, 255, 0));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        setMinimumSize(new java.awt.Dimension(596, 428));
+        setPreferredSize(new java.awt.Dimension(596, 428));
 
-        preferenciaContatoInputEditarPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                preferenciaContatoInputEditarPacienteActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(255, 246, 248));
+        jPanel1.setPreferredSize(new java.awt.Dimension(596, 428));
 
+        nomeInputEditarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        nomeInputEditarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        nomeInputEditarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+
+        profissaoInputEditarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        profissaoInputEditarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        profissaoInputEditarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+
+        generoInputEditarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        generoInputEditarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        generoInputEditarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+
+        estadoCivilInputEditarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        estadoCivilInputEditarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        estadoCivilInputEditarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+
+        emailInputEditarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        emailInputEditarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        emailInputEditarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+
+        preferenciaContatoInputEditarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        preferenciaContatoInputEditarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        preferenciaContatoInputEditarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Nome");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Gênero");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Telefone");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Profissão");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Estado Civil");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Email");
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Data de Nascimento");
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setText("Preferência Contato");
 
-        telefoneInputEditarPaciente.addActionListener(new java.awt.event.ActionListener() {
+        dataNascimentoInputEditarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        dataNascimentoInputEditarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+
+        btnCancelarEdicao.setBackground(new java.awt.Color(204, 204, 204));
+        btnCancelarEdicao.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        btnCancelarEdicao.setForeground(new java.awt.Color(0, 0, 0));
+        btnCancelarEdicao.setText("Cancelar");
+        btnCancelarEdicao.setPreferredSize(new java.awt.Dimension(170, 35));
+        btnCancelarEdicao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telefoneInputEditarPacienteActionPerformed(evt);
+                btnCancelarEdicaoActionPerformed(evt);
             }
         });
 
-        editarPacientesButton.setText("Editar");
-        editarPacientesButton.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarPacientes.setBackground(new java.awt.Color(1, 66, 158));
+        btnEditarPacientes.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        btnEditarPacientes.setText("Editar");
+        btnEditarPacientes.setPreferredSize(new java.awt.Dimension(170, 35));
+        btnEditarPacientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarPacientesButtonActionPerformed(evt);
+                btnEditarPacientesActionPerformed(evt);
             }
         });
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI Light", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(1, 66, 158));
+        jLabel9.setText("Editar paciente");
+
+        try {
+            telefoneInputEditarPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-#### ")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        telefoneInputEditarPaciente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        telefoneInputEditarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        telefoneInputEditarPaciente.setPreferredSize(new java.awt.Dimension(230, 30));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(preferenciaContatoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(generoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(nomeInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(telefoneInputEditarPaciente, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(108, 108, 108)
+                    .addComponent(jLabel8)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(generoInputEditarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(preferenciaContatoInputEditarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(telefoneInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3))
+                    .addComponent(nomeInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(emailInputEditarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                            .addComponent(estadoCivilInputEditarPaciente)
-                            .addComponent(profissaoInputEditarPaciente))
-                        .addGap(147, 147, 147))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(dataNascimentoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(dataNascimentoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emailInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(profissaoInputEditarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(estadoCivilInputEditarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(btnCancelarEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addComponent(btnEditarPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(186, 186, 186)
-                .addComponent(editarPacientesButton)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(205, 205, 205)
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nomeInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(profissaoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(generoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(estadoCivilInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel6))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(emailInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(estadoCivilInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(telefoneInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(generoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dataNascimentoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(preferenciaContatoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(editarPacientesButton)
-                .addGap(15, 15, 15))
+                    .addComponent(emailInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(telefoneInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(preferenciaContatoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dataNascimentoInputEditarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCancelarEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditarPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -206,9 +273,8 @@ public class TelaEditarPaciente extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,19 +286,7 @@ public class TelaEditarPaciente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nomeInputEditarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeInputEditarPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeInputEditarPacienteActionPerformed
-
-    private void preferenciaContatoInputEditarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preferenciaContatoInputEditarPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_preferenciaContatoInputEditarPacienteActionPerformed
-
-    private void telefoneInputEditarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneInputEditarPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefoneInputEditarPacienteActionPerformed
-
-    private void editarPacientesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPacientesButtonActionPerformed
+    private void btnEditarPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPacientesActionPerformed
         String nome = nomeInputEditarPaciente.getText();
         String profissao = profissaoInputEditarPaciente.getText();
         String genero = generoInputEditarPaciente.getText();
@@ -241,17 +295,17 @@ public class TelaEditarPaciente extends javax.swing.JInternalFrame {
         String email = emailInputEditarPaciente.getText();
         String preferenciaContato = preferenciaContatoInputEditarPaciente.getText();
         Date dataNascimento = dataNascimentoInputEditarPaciente.getDate();
-        
+
         ValidadorDadosPaciente validador = new ValidadorDadosPaciente(nome, profissao, genero, estadoCivil, telefone, email, preferenciaContato, dataNascimento);
-        String erro = validador.validar();    
-        
-        if(erro != null ){
-           JOptionPane.showMessageDialog(null, erro);
+        String erro = validador.validar();
+
+        if (erro != null) {
+            JOptionPane.showMessageDialog(null, erro);
             return;
         }
-        
+
         long telefoneNumero = validador.getTelefone();
-        
+
         paciente.setNome(nome);
         paciente.setProfissao(profissao);
         paciente.setGenero(genero);
@@ -270,12 +324,26 @@ public class TelaEditarPaciente extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Insira dados novos.");
         }
-    }//GEN-LAST:event_editarPacientesButtonActionPerformed
+    }//GEN-LAST:event_btnEditarPacientesActionPerformed
 
-
+    private void btnCancelarEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEdicaoActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_btnCancelarEdicaoActionPerformed
+    
+    //metrodo para centraliar
+    public void centralizar() {
+        if (getParent() != null) {
+            this.setLocation(
+                    (getParent().getWidth() - this.getWidth()) / 2,
+                    (getParent().getHeight() - this.getHeight()) / 2
+            );
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelarEdicao;
+    private javax.swing.JButton btnEditarPacientes;
     private com.toedter.calendar.JDateChooser dataNascimentoInputEditarPaciente;
-    private javax.swing.JButton editarPacientesButton;
     private javax.swing.JTextField emailInputEditarPaciente;
     private javax.swing.JTextField estadoCivilInputEditarPaciente;
     private javax.swing.JTextField generoInputEditarPaciente;
@@ -287,6 +355,7 @@ public class TelaEditarPaciente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nomeInputEditarPaciente;
     private javax.swing.JTextField preferenciaContatoInputEditarPaciente;

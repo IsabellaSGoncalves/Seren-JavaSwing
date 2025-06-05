@@ -7,8 +7,11 @@ package com.seren.view;
 import com.seren.model.Usuario;
 import javax.swing.ImageIcon;
 import com.seren.components.RoundedPanel;
+import com.seren.controller.BuscarPacientesController;
 import javax.swing.JOptionPane;
 import com.seren.util.LembrarEmailUtil;
+import java.util.ArrayList;
+import org.bson.Document;
 
 /**
  *
@@ -25,7 +28,6 @@ public class TelaInicial extends javax.swing.JFrame {
         initComponents();
         setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/iconLogo.png")).getImage());
         setResizable(false);
-        setLocationRelativeTo(null);
     }
 
     private Usuario usuario;
@@ -36,6 +38,7 @@ public class TelaInicial extends javax.swing.JFrame {
         this.usuario = usuarioLogado;
         this.lembrarEmail = lembrarEmail;
         exibirSaudacao();
+        totalPacientesCadastrados();
 
         labelSerengotoInitialScreen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -43,6 +46,7 @@ public class TelaInicial extends javax.swing.JFrame {
                     try {
                         telaPacientes.setClosed(true);
                         telaPacientes = null;
+                        totalPacientesCadastrados();
                     } catch (java.beans.PropertyVetoException e) {
                         e.printStackTrace();
                     }
@@ -66,6 +70,13 @@ public class TelaInicial extends javax.swing.JFrame {
         });
 
         labelSairgotoLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        pacientesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pacientesButtonActionPerformed(evt);
+            }
+        });
+
     }
 
     private void exibirSaudacao() {
@@ -97,16 +108,13 @@ public class TelaInicial extends javax.swing.JFrame {
         labelApresentarUsername = new javax.swing.JLabel();
         jPanel3 = new com.seren.components.RoundedPanel(30);
         jPanel8 = new com.seren.components.RoundedPanel(40);
-        jLabel3 = new javax.swing.JLabel();
+        labelTotalPacientes = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel5 = new com.seren.components.RoundedPanel(30);
         jCalendar1 = new com.seren.components.CustomJCalendar();
         jPanel6 = new com.seren.components.RoundedPanel(30);
         jLabel1 = new javax.swing.JLabel();
         pacientesButton = new com.seren.components.RoundedButton(20);
-        jPanel4 = new com.seren.components.RoundedPanel(30);
-        pacientesButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         labelSerengotoInitialScreen = new javax.swing.JLabel();
         jPanel7 = new com.seren.components.RoundedPanel(30);
@@ -145,9 +153,9 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel8.setRequestFocusEnabled(false);
         jPanel8.setVerifyInputWhenFocusTarget(false);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Total Pacientes Cadastrados");
+        labelTotalPacientes.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
+        labelTotalPacientes.setForeground(new java.awt.Color(0, 0, 0));
+        labelTotalPacientes.setText("Total Pacientes Cadastrados");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info2.png"))); // NOI18N
 
@@ -159,7 +167,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addContainerGap(157, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addComponent(labelTotalPacientes)
                 .addGap(130, 130, 130))
         );
         jPanel8Layout.setVerticalGroup(
@@ -167,7 +175,7 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
+                    .addComponent(labelTotalPacientes)
                     .addComponent(jLabel4))
                 .addGap(21, 21, 21))
         );
@@ -264,29 +272,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel3.add(jPanel6);
         jPanel6.setBounds(0, 130, 330, 330);
 
-        jPanel4.setBackground(new java.awt.Color(255, 230, 234));
-        jPanel4.setMinimumSize(new java.awt.Dimension(120, 120));
-        jPanel4.setPreferredSize(new java.awt.Dimension(200, 200));
-        jPanel4.setLayout(null);
-
-        pacientesButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        pacientesButton1.setText("Pacientes");
-        pacientesButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pacientesButton1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(pacientesButton1);
-        pacientesButton1.setBounds(80, 200, 180, 40);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PacientesIcon.png"))); // NOI18N
-        jLabel2.setPreferredSize(new java.awt.Dimension(190, 190));
-        jPanel4.add(jLabel2);
-        jLabel2.setBounds(100, 60, 140, 140);
-
         jDesktopPane1.setLayer(labelApresentarUsername, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -295,13 +282,10 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                            .addGap(27, 27, 27)
-                            .addComponent(labelApresentarUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                            .addGap(328, 328, 328)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(labelApresentarUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(276, 276, 276)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
@@ -311,9 +295,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(labelApresentarUsername)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel1.add(jDesktopPane1);
@@ -394,12 +376,16 @@ public class TelaInicial extends javax.swing.JFrame {
             telaPacientes = new TelaPacientes(this.usuario);
             jDesktopPane1.add(telaPacientes);
             telaPacientes.setVisible(true);
+            setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/iconLogo.png")).getImage());
+            setResizable(false);
         }
     }//GEN-LAST:event_pacientesButtonActionPerformed
 
-    private void pacientesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacientesButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pacientesButton1ActionPerformed
+    private void totalPacientesCadastrados() {
+        BuscarPacientesController controller = new BuscarPacientesController();
+        ArrayList<Document> pacientes = controller.buscarPacientes(usuario.getId());
+        labelTotalPacientes.setText(pacientes.size() + " pacientes cadastrados");
+    }
 
     /**
      * @param args the command line arguments
@@ -441,13 +427,10 @@ public class TelaInicial extends javax.swing.JFrame {
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -456,7 +439,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel labelSairgotoLogin;
     private javax.swing.JLabel labelSerengotoInitialScreen;
     private javax.swing.JLabel labelSerentoMeuPerfil;
+    private javax.swing.JLabel labelTotalPacientes;
     private javax.swing.JButton pacientesButton;
-    private javax.swing.JButton pacientesButton1;
     // End of variables declaration//GEN-END:variables
 }

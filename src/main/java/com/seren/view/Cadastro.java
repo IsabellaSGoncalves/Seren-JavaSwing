@@ -22,8 +22,8 @@ public class Cadastro extends javax.swing.JFrame {
      */
     public Cadastro() {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/iconLogo.png")).getImage());
-        setResizable(false);
+        setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/iconLogo.png")).getImage()); //icon do projeto
+        setResizable(false); //não deixa aumentar a tela
     }
 
     /**
@@ -126,18 +126,13 @@ public class Cadastro extends javax.swing.JFrame {
         emailInputCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         emailInputCadastro.setToolTipText("");
         emailInputCadastro.setMargin(new java.awt.Insets(0, 30, 0, 10));
-        emailInputCadastro.setNextFocusableComponent(usernameInputCadastro);
+        emailInputCadastro.setNextFocusableComponent(senhaInputCadastro);
         emailInputCadastro.setPreferredSize(new java.awt.Dimension(230, 30));
-        emailInputCadastro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailInputCadastroActionPerformed(evt);
-            }
-        });
         jPanel6.add(emailInputCadastro);
         emailInputCadastro.setBounds(120, 250, 230, 30);
 
         usernameInputCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        usernameInputCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        usernameInputCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         usernameInputCadastro.setMargin(new java.awt.Insets(0, 30, 0, 10));
         usernameInputCadastro.setNextFocusableComponent(telefoneInputCadastro);
         usernameInputCadastro.setPreferredSize(new java.awt.Dimension(230, 30));
@@ -204,7 +199,7 @@ public class Cadastro extends javax.swing.JFrame {
         }
         telefoneInputCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         telefoneInputCadastro.setMargin(new java.awt.Insets(0, 30, 0, 10));
-        telefoneInputCadastro.setNextFocusableComponent(senhaInputCadastro);
+        telefoneInputCadastro.setNextFocusableComponent(emailInputCadastro);
         telefoneInputCadastro.setPreferredSize(new java.awt.Dimension(230, 30));
         jPanel6.add(telefoneInputCadastro);
         telefoneInputCadastro.setBounds(120, 190, 230, 30);
@@ -351,10 +346,6 @@ public class Cadastro extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void emailInputCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailInputCadastroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailInputCadastroActionPerformed
 
     private void cadastroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroButtonActionPerformed
         String username = usernameInputCadastro.getText();

@@ -40,7 +40,7 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
      */
     public TelaPacientes() {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/iconLogo.png")).getImage());
+        setResizable(false);
 
     }
 
@@ -61,9 +61,12 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         initComponents();
         this.usuario = usuarioLogado;
         exibirInfoUsuario();
+
+        //tirando a borda de uma tela separada
         this.setBorder(null);
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
+
         criarMenuPopup();
         adicionarListenerTabela();
         carregarPacientesNaTabela();
@@ -111,7 +114,7 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         tabelaPacientes.setModel(modelo);
 
         JTableHeader cabecalho = tabelaPacientes.getTableHeader();
-        cabecalho.setFont(new Font("Segoe UI Ligth", Font.BOLD, 18)); 
+        cabecalho.setFont(new Font("Segoe UI Ligth", Font.BOLD, 18));
     }
 
     /**
@@ -127,7 +130,7 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jDesktopPane2 = new javax.swing.JDesktopPane();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new com.seren.components.RoundedButton(30);
+        btnBuscarPacienteNome = new com.seren.components.RoundedButton(30);
         buscarInputBuscarPaciente = new com.seren.components.RoundedJFormattedTextField(30);
         labelNomeUsuario = new javax.swing.JLabel();
         labelEmailUsuario = new javax.swing.JLabel();
@@ -157,22 +160,25 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(255, 246, 248));
         jPanel2.setLayout(null);
 
-        jButton1.setBackground(new java.awt.Color(1, 66, 158));
-        jButton1.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarPacienteNome.setBackground(new java.awt.Color(1, 66, 158));
+        btnBuscarPacienteNome.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        btnBuscarPacienteNome.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscarPacienteNome.setText("Buscar");
+        btnBuscarPacienteNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBuscarPacienteNomeActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
-        jButton1.setBounds(310, 30, 90, 40);
+        jPanel2.add(btnBuscarPacienteNome);
+        btnBuscarPacienteNome.setBounds(310, 30, 90, 40);
 
         buscarInputBuscarPaciente.setBackground(new java.awt.Color(255, 255, 255));
         buscarInputBuscarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        buscarInputBuscarPaciente.setBorder(null);
-        buscarInputBuscarPaciente.setMargin(new java.awt.Insets(0, 30, 0, 10));
+        buscarInputBuscarPaciente.setForeground(new java.awt.Color(0, 0, 0));
+        buscarInputBuscarPaciente.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 10));
+        buscarInputBuscarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        buscarInputBuscarPaciente.setMinimumSize(new java.awt.Dimension(390, 40));
+        buscarInputBuscarPaciente.setPreferredSize(new java.awt.Dimension(390, 40));
         jPanel2.add(buscarInputBuscarPaciente);
         buscarInputBuscarPaciente.setBounds(10, 30, 390, 40);
 
@@ -253,9 +259,7 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnCadastrarPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
@@ -344,6 +348,8 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
             TelaEditarPaciente telaEditar = new TelaEditarPaciente(this.usuario, paciente, this);
             jDesktopPane2.add(telaEditar);
             telaEditar.setVisible(true);
+            telaEditar.centralizar(); //centralizando o jInternal que vem
+
         }
     }
 
@@ -375,9 +381,10 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         TelaCadastrarPaciente cadastrarPaciente = new TelaCadastrarPaciente(this.usuario, this);
         jDesktopPane2.add(cadastrarPaciente);
         cadastrarPaciente.setVisible(true);
+        cadastrarPaciente.centralizar(); //centralizando o jInternal que vem
     }//GEN-LAST:event_btnCadastrarPacienteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnBuscarPacienteNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteNomeActionPerformed
         // TODO add your handling code here:
         String nome = buscarInputBuscarPaciente.getText();
 
@@ -387,13 +394,12 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
             return;
         }
         carregarPacientesNaTabela(nome);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }//GEN-LAST:event_btnBuscarPacienteNomeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarPacienteNome;
     private javax.swing.JButton btnCadastrarPaciente;
     private javax.swing.JTextField buscarInputBuscarPaciente;
-    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
@@ -406,7 +412,4 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
     private javax.swing.JTable tabelaPacientes;
     // End of variables declaration//GEN-END:variables
 
-    private void setIconImage(Image image) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
