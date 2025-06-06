@@ -9,6 +9,7 @@ import com.seren.model.Usuario;
 import com.seren.util.ValidadorDadosPaciente;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import org.bson.types.ObjectId;
 
 /**
@@ -25,7 +26,9 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
     
     public TelaCadastrarPaciente() {
         initComponents();
+        setResizable(false);
     }
+    
     private Usuario usuario;
     private TelaPacientes telaPacientes;
     
@@ -33,6 +36,10 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
         initComponents();
         this.usuario = usuarioLogado;
         this.telaPacientes = telaPacientes;
+        
+        //tirando a borda de uma tela separada
+        BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
+        ui.setNorthPane(null);
     }
 
     /**
@@ -45,12 +52,6 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        nomeInputCadastrarPaciente = new javax.swing.JTextField();
-        profissaoInputCadastrarPaciente = new javax.swing.JTextField();
-        generoInputCadastrarPaciente = new javax.swing.JTextField();
-        estadoCivilInputCadastrarPaciente = new javax.swing.JTextField();
-        emailInputCadastrarPaciente = new javax.swing.JTextField();
-        preferenciaContatoInputCadastrarPaciente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -59,164 +60,179 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        dataNascimentoInputCadastrarPaciente = new com.toedter.calendar.JDateChooser();
-        telefoneInputCadastrarPaciente = new javax.swing.JFormattedTextField();
-        cadastrarPacientesButton = new javax.swing.JButton();
+        nomeInputCadastrarPaciente = new com.seren.components.RoundedJFormattedTextField(30);
+        profissaoInputCadastrarPaciente = new com.seren.components.RoundedJFormattedTextField(30);
+        generoInputCadastrarPaciente = new com.seren.components.RoundedJFormattedTextField(30);
+        estadoCivilInputCadastrarPaciente = new com.seren.components.RoundedJFormattedTextField(20);
+        emailInputCadastrarPaciente = new com.seren.components.RoundedJFormattedTextField(30);
+        preferenciaContatoInputCadastrarPaciente = new com.seren.components.RoundedJFormattedTextField(20);
+        dataNascimentoInputCadastrarPaciente = new com.seren.components.RoundedJDateChooser(20);
+        cadastrarPacientesButton = new com.seren.components.RoundedButton(30);
+        jButton1 = new com.seren.components.RoundedButton(30);
+        jLabel9 = new javax.swing.JLabel();
+        telefoneInputCadastrarPaciente = new com.seren.components.RoundedJFormattedTextField(30);
 
-        setMinimumSize(new java.awt.Dimension(700, 630));
-        setPreferredSize(new java.awt.Dimension(700, 630));
+        setBackground(new java.awt.Color(153, 153, 0));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        setMinimumSize(new java.awt.Dimension(596, 428));
+        setPreferredSize(new java.awt.Dimension(596, 428));
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(700, 630));
+        jPanel1.setBackground(new java.awt.Color(255, 246, 248));
+        jPanel1.setPreferredSize(new java.awt.Dimension(596, 428));
+        jPanel1.setLayout(null);
 
-        nomeInputCadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeInputCadastrarPacienteActionPerformed(evt);
-            }
-        });
-
-        preferenciaContatoInputCadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                preferenciaContatoInputCadastrarPacienteActionPerformed(evt);
-            }
-        });
-
+        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Nome");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(20, 70, 50, 20);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Gênero");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(20, 140, 47, 20);
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Telefone");
+        jLabel3.setMaximumSize(new java.awt.Dimension(55, 14));
+        jLabel3.setMinimumSize(new java.awt.Dimension(55, 14));
+        jLabel3.setPreferredSize(new java.awt.Dimension(55, 14));
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(20, 220, 69, 14);
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Profissão");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(310, 70, 70, 20);
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Estado Civil");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(306, 144, 80, 17);
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Email");
+        jLabel6.setMaximumSize(new java.awt.Dimension(34, 14));
+        jLabel6.setMinimumSize(new java.awt.Dimension(34, 14));
+        jLabel6.setPreferredSize(new java.awt.Dimension(34, 14));
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(310, 210, 40, 20);
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Data de Nascimento");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(310, 290, 130, 14);
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setText("Preferência Contato");
+        jLabel8.setMaximumSize(new java.awt.Dimension(127, 14));
+        jLabel8.setMinimumSize(new java.awt.Dimension(127, 14));
+        jLabel8.setPreferredSize(new java.awt.Dimension(127, 14));
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(20, 290, 135, 14);
 
-        telefoneInputCadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telefoneInputCadastrarPacienteActionPerformed(evt);
-            }
-        });
+        nomeInputCadastrarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        nomeInputCadastrarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        nomeInputCadastrarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+        jPanel1.add(nomeInputCadastrarPaciente);
+        nomeInputCadastrarPaciente.setBounds(20, 100, 260, 35);
 
+        profissaoInputCadastrarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        profissaoInputCadastrarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        profissaoInputCadastrarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+        jPanel1.add(profissaoInputCadastrarPaciente);
+        profissaoInputCadastrarPaciente.setBounds(310, 100, 260, 35);
+
+        generoInputCadastrarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        generoInputCadastrarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        generoInputCadastrarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+        jPanel1.add(generoInputCadastrarPaciente);
+        generoInputCadastrarPaciente.setBounds(20, 170, 260, 35);
+
+        estadoCivilInputCadastrarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        estadoCivilInputCadastrarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        estadoCivilInputCadastrarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+        jPanel1.add(estadoCivilInputCadastrarPaciente);
+        estadoCivilInputCadastrarPaciente.setBounds(310, 170, 260, 35);
+
+        emailInputCadastrarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        emailInputCadastrarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        emailInputCadastrarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+        jPanel1.add(emailInputCadastrarPaciente);
+        emailInputCadastrarPaciente.setBounds(310, 240, 260, 35);
+
+        preferenciaContatoInputCadastrarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        preferenciaContatoInputCadastrarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        preferenciaContatoInputCadastrarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+        jPanel1.add(preferenciaContatoInputCadastrarPaciente);
+        preferenciaContatoInputCadastrarPaciente.setBounds(20, 310, 260, 35);
+
+        dataNascimentoInputCadastrarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        dataNascimentoInputCadastrarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+        jPanel1.add(dataNascimentoInputCadastrarPaciente);
+        dataNascimentoInputCadastrarPaciente.setBounds(310, 310, 260, 35);
+
+        cadastrarPacientesButton.setBackground(new java.awt.Color(1, 66, 158));
+        cadastrarPacientesButton.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         cadastrarPacientesButton.setText("Cadastrar");
+        cadastrarPacientesButton.setPreferredSize(new java.awt.Dimension(170, 35));
         cadastrarPacientesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cadastrarPacientesButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(cadastrarPacientesButton);
+        cadastrarPacientesButton.setBounds(359, 378, 170, 35);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(preferenciaContatoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(generoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(nomeInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(telefoneInputCadastrarPaciente, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(108, 108, 108)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(emailInputCadastrarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                            .addComponent(estadoCivilInputCadastrarPaciente)
-                            .addComponent(profissaoInputCadastrarPaciente))
-                        .addGap(147, 147, 147))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(dataNascimentoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(cadastrarPacientesButton)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(profissaoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(generoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(estadoCivilInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel6))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(emailInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(telefoneInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dataNascimentoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(preferenciaContatoInputCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(116, 116, 116)
-                .addComponent(cadastrarPacientesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(199, Short.MAX_VALUE))
-        );
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
+        jButton1.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        jButton1.setText("Cancelar");
+        jButton1.setPreferredSize(new java.awt.Dimension(170, 35));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(63, 378, 170, 35);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI Light", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(1, 66, 158));
+        jLabel9.setText("Adicionar novo paciente");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(165, 18, 260, 32);
+
+        try {
+            telefoneInputCadastrarPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-#### ")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        telefoneInputCadastrarPaciente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        telefoneInputCadastrarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        telefoneInputCadastrarPaciente.setPreferredSize(new java.awt.Dimension(260, 35));
+        jPanel1.add(telefoneInputCadastrarPaciente);
+        telefoneInputCadastrarPaciente.setBounds(20, 240, 260, 35);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void preferenciaContatoInputCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preferenciaContatoInputCadastrarPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_preferenciaContatoInputCadastrarPacienteActionPerformed
 
     private void cadastrarPacientesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarPacientesButtonActionPerformed
         // TODO add your handling code here:
@@ -224,11 +240,13 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
         String profissao = profissaoInputCadastrarPaciente.getText();
         String genero = generoInputCadastrarPaciente.getText();
         String estadoCivil = estadoCivilInputCadastrarPaciente.getText();
-        String telefone = telefoneInputCadastrarPaciente.getText();
+        String telefoneFormatado = telefoneInputCadastrarPaciente.getText();
         String email = emailInputCadastrarPaciente.getText();
         String preferenciaContato = preferenciaContatoInputCadastrarPaciente.getText();
         Date dataNascimento = dataNascimentoInputCadastrarPaciente.getDate();
         ObjectId id_usuario = usuario.getId();
+        
+        String telefone = telefoneFormatado.replaceAll("[^\\d]", "");
         
         ValidadorDadosPaciente validador = new ValidadorDadosPaciente(nome, profissao, genero, estadoCivil, telefone, email, preferenciaContato, dataNascimento);
         String erro = validador.validar();
@@ -249,13 +267,19 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cadastrarPacientesButtonActionPerformed
 
-    private void nomeInputCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeInputCadastrarPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeInputCadastrarPacienteActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void telefoneInputCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneInputCadastrarPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefoneInputCadastrarPacienteActionPerformed
+    //metrodo para centraliar
+    public void centralizar() {
+    if (getParent() != null) {
+        this.setLocation(
+            (getParent().getWidth() - this.getWidth()) / 2,
+            (getParent().getHeight() - this.getHeight()) / 2
+        );
+    }
+}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -264,6 +288,7 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField emailInputCadastrarPaciente;
     private javax.swing.JTextField estadoCivilInputCadastrarPaciente;
     private javax.swing.JTextField generoInputCadastrarPaciente;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -272,6 +297,7 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nomeInputCadastrarPaciente;
     private javax.swing.JTextField preferenciaContatoInputCadastrarPaciente;

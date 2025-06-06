@@ -7,8 +7,11 @@ package com.seren.view;
 import com.seren.model.Usuario;
 import javax.swing.ImageIcon;
 import com.seren.components.RoundedPanel;
+import com.seren.controller.BuscarPacientesController;
 import javax.swing.JOptionPane;
 import com.seren.util.LembrarEmailUtil;
+import java.util.ArrayList;
+import org.bson.Document;
 
 /**
  *
@@ -35,6 +38,7 @@ public class TelaInicial extends javax.swing.JFrame {
         this.usuario = usuarioLogado;
         this.lembrarEmail = lembrarEmail;
         exibirSaudacao();
+        totalPacientesCadastrados();
 
         labelSerengotoInitialScreen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -42,6 +46,7 @@ public class TelaInicial extends javax.swing.JFrame {
                     try {
                         telaPacientes.setClosed(true);
                         telaPacientes = null;
+                        totalPacientesCadastrados();
                     } catch (java.beans.PropertyVetoException e) {
                         e.printStackTrace();
                     }
@@ -65,6 +70,13 @@ public class TelaInicial extends javax.swing.JFrame {
         });
 
         labelSairgotoLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        pacientesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pacientesButtonActionPerformed(evt);
+            }
+        });
+
     }
 
     private void exibirSaudacao() {
@@ -95,24 +107,24 @@ public class TelaInicial extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         labelApresentarUsername = new javax.swing.JLabel();
         jPanel3 = new com.seren.components.RoundedPanel(30);
-        jPanel5 = new javax.swing.JPanel();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jPanel8 = new com.seren.components.RoundedPanel(40);
+        labelTotalPacientes = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel5 = new com.seren.components.RoundedPanel(30);
+        jCalendar1 = new com.seren.components.CustomJCalendar();
         jPanel6 = new com.seren.components.RoundedPanel(30);
         jLabel1 = new javax.swing.JLabel();
-        pacientesButton = new javax.swing.JButton();
-        jPanel4 = new com.seren.components.RoundedPanel(30);
-        pacientesButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        pacientesButton = new com.seren.components.RoundedButton(20);
         jPanel2 = new javax.swing.JPanel();
         labelSerengotoInitialScreen = new javax.swing.JLabel();
         jPanel7 = new com.seren.components.RoundedPanel(30);
         labelSairgotoLogin = new javax.swing.JLabel();
+        labelSerentoMeuPerfil = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Seren - Tela inicial");
         setBackground(new java.awt.Color(51, 255, 51));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(940, 665));
 
         jPanel1.setBackground(new java.awt.Color(255, 51, 204));
         jPanel1.setMinimumSize(new java.awt.Dimension(920, 630));
@@ -126,45 +138,102 @@ public class TelaInicial extends javax.swing.JFrame {
         labelApresentarUsername.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
         labelApresentarUsername.setText("Bom dia, Usuário!");
 
-        jPanel3.setBackground(new java.awt.Color(255, 230, 234));
+        jPanel3.setBackground(new java.awt.Color(255, 246, 248));
+        jPanel3.setForeground(new java.awt.Color(204, 255, 153));
+        jPanel3.setToolTipText("");
         jPanel3.setMinimumSize(new java.awt.Dimension(120, 120));
         jPanel3.setPreferredSize(new java.awt.Dimension(200, 200));
         jPanel3.setLayout(null);
 
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel8.setFocusable(false);
+        jPanel8.setPreferredSize(new java.awt.Dimension(675, 95));
+        jPanel8.setRequestFocusEnabled(false);
+        jPanel8.setVerifyInputWhenFocusTarget(false);
+
+        labelTotalPacientes.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
+        labelTotalPacientes.setText("Total Pacientes Cadastrados");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info2.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(157, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(labelTotalPacientes)
+                .addGap(130, 130, 130))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelTotalPacientes)
+                    .addComponent(jLabel4))
+                .addGap(21, 21, 21))
+        );
+
+        jPanel3.add(jPanel8);
+        jPanel8.setBounds(0, 20, 700, 90);
+
+        jPanel5.setBackground(new java.awt.Color(225, 225, 225));
+        jPanel5.setForeground(new java.awt.Color(255, 255, 255));
         jPanel5.setPreferredSize(new java.awt.Dimension(330, 330));
 
+        jCalendar1.setDate(new java.util.Date(1749130444000L));
+        jCalendar1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jCalendar1.setDecorationBackgroundColor(new java.awt.Color(255, 255, 255));
+        jCalendar1.setDoubleBuffered(false);
+        jCalendar1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jCalendar1.setMaximumSize(new java.awt.Dimension(200, 300));
         jCalendar1.setMinSelectableDate(new java.util.Date(-62135755081000L));
         jCalendar1.setMinimumSize(new java.awt.Dimension(200, 300));
+        jCalendar1.setOpaque(true);
         jCalendar1.setPreferredSize(new java.awt.Dimension(340, 300));
+        jCalendar1.setRequestFocusEnabled(false);
+        jCalendar1.setSundayForeground(new java.awt.Color(0, 51, 255));
+        jCalendar1.setTodayButtonText("");
+        jCalendar1.setVerifyInputWhenFocusTarget(false);
+        jCalendar1.setWeekOfYearVisible(false);
+        jCalendar1.setWeekdayForeground(new java.awt.Color(0, 51, 204));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 350, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                    .addGap(8, 8, 8)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 330, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         jPanel3.add(jPanel5);
-        jPanel5.setBounds(340, 90, 350, 330);
+        jPanel5.setBounds(350, 130, 350, 330);
 
         jPanel6.setBackground(new java.awt.Color(250, 186, 197));
+        jPanel6.setForeground(new java.awt.Color(255, 255, 255));
         jPanel6.setPreferredSize(new java.awt.Dimension(330, 330));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Pacientes.png"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(190, 190));
 
-        pacientesButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        pacientesButton.setFont(new java.awt.Font("Segoe UI Light", 1, 24)); // NOI18N
         pacientesButton.setText("Pacientes");
         pacientesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,48 +246,30 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pacientesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(pacientesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pacientesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pacientesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         jPanel3.add(jPanel6);
-        jPanel6.setBounds(0, 90, 330, 330);
-
-        jPanel4.setBackground(new java.awt.Color(255, 230, 234));
-        jPanel4.setMinimumSize(new java.awt.Dimension(120, 120));
-        jPanel4.setPreferredSize(new java.awt.Dimension(200, 200));
-        jPanel4.setLayout(null);
-
-        pacientesButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        pacientesButton1.setText("Pacientes");
-        pacientesButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pacientesButton1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(pacientesButton1);
-        pacientesButton1.setBounds(80, 200, 180, 40);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PacientesIcon.png"))); // NOI18N
-        jLabel2.setPreferredSize(new java.awt.Dimension(190, 190));
-        jPanel4.add(jLabel2);
-        jLabel2.setBounds(100, 60, 140, 140);
+        jPanel6.setBounds(0, 130, 330, 330);
 
         jDesktopPane1.setLayer(labelApresentarUsername, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -227,13 +278,9 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                            .addGap(27, 27, 27)
-                            .addComponent(labelApresentarUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                            .addGap(328, 328, 328)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(labelApresentarUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(276, 276, 276)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
@@ -243,9 +290,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(labelApresentarUsername)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel1.add(jDesktopPane1);
@@ -258,33 +303,40 @@ public class TelaInicial extends javax.swing.JFrame {
         labelSerengotoInitialScreen.setFont(new java.awt.Font("Segoe Script", 0, 48)); // NOI18N
         labelSerengotoInitialScreen.setForeground(new java.awt.Color(1, 66, 158));
         labelSerengotoInitialScreen.setText("Seren");
-        labelSerengotoInitialScreen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelSerengotoInitialScreen.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.add(labelSerengotoInitialScreen);
         labelSerengotoInitialScreen.setBounds(24, 17, 150, 77);
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
-        labelSairgotoLogin.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        labelSairgotoLogin.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         labelSairgotoLogin.setForeground(new java.awt.Color(255, 51, 51));
         labelSairgotoLogin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labelSairgotoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Log out.png"))); // NOI18N
         labelSairgotoLogin.setText("Sair");
-        labelSairgotoLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelSairgotoLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         labelSairgotoLogin.setIconTextGap(10);
+
+        labelSerentoMeuPerfil.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
+        labelSerentoMeuPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        labelSerentoMeuPerfil.setText(" Meu Perfil");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelSairgotoLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labelSairgotoLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelSerentoMeuPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(473, Short.MAX_VALUE)
+                .addComponent(labelSerentoMeuPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
                 .addComponent(labelSairgotoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -299,15 +351,13 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 35, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -320,12 +370,16 @@ public class TelaInicial extends javax.swing.JFrame {
             telaPacientes = new TelaPacientes(this.usuario);
             jDesktopPane1.add(telaPacientes);
             telaPacientes.setVisible(true);
+            setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/iconLogo.png")).getImage());
+            setResizable(false);
         }
     }//GEN-LAST:event_pacientesButtonActionPerformed
 
-    private void pacientesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pacientesButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pacientesButton1ActionPerformed
+    private void totalPacientesCadastrados() {
+        BuscarPacientesController controller = new BuscarPacientesController();
+        ArrayList<Document> pacientes = controller.buscarPacientes(usuario.getId());
+        labelTotalPacientes.setText(pacientes.size() + " pacientes cadastrados");
+    }
 
     /**
      * @param args the command line arguments
@@ -367,18 +421,19 @@ public class TelaInicial extends javax.swing.JFrame {
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JLabel labelApresentarUsername;
     private javax.swing.JLabel labelSairgotoLogin;
     private javax.swing.JLabel labelSerengotoInitialScreen;
+    private javax.swing.JLabel labelSerentoMeuPerfil;
+    private javax.swing.JLabel labelTotalPacientes;
     private javax.swing.JButton pacientesButton;
-    private javax.swing.JButton pacientesButton1;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,20 +26,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/iconLogo.png")).getImage());
         setResizable(false);
-        setLocationRelativeTo(null);
 
-//      labelLogingotoCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
-//        public void mouseClicked(java.awt.event.MouseEvent evt) {
-//           
-//            Cadastro cadastro = new Cadastro();
-//            cadastro.setVisible(true);
-//            
-//            setVisible(false);
-//        }
-//    });
-//
-//    
-//    labelLogingotoCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         if (LembrarEmailUtil.temEmailGuardado()) {
             emailInputLogin.setText(LembrarEmailUtil.getEmailGuardado());
             jCheckBox1.setSelected(true);
@@ -259,11 +246,6 @@ public class Login extends javax.swing.JFrame {
         emailInputLogin.setMargin(new java.awt.Insets(0, 30, 0, 10));
         emailInputLogin.setNextFocusableComponent(senhaInputLogin);
         emailInputLogin.setPreferredSize(new java.awt.Dimension(225, 30));
-        emailInputLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailInputLoginActionPerformed(evt);
-            }
-        });
         jPanel5.add(emailInputLogin);
         emailInputLogin.setBounds(60, 30, 225, 30);
 
@@ -275,6 +257,7 @@ public class Login extends javax.swing.JFrame {
 
         senhaInputLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         senhaInputLogin.setMargin(new java.awt.Insets(0, 30, 0, 10));
+        senhaInputLogin.setName(""); // NOI18N
         senhaInputLogin.setNextFocusableComponent(loginButton);
         senhaInputLogin.setPreferredSize(new java.awt.Dimension(225, 30));
         jPanel5.add(senhaInputLogin);
@@ -367,7 +350,6 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastroButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroButton1ActionPerformed
-        // TODO add your handling code here:
         Cadastro cadastro = new Cadastro();
         cadastro.setVisible(true);
 
@@ -409,10 +391,6 @@ public class Login extends javax.swing.JFrame {
         emailInputLogin.setText("");
         senhaInputLogin.setText("");
     }//GEN-LAST:event_loginButtonActionPerformed
-
-    private void emailInputLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailInputLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailInputLoginActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:

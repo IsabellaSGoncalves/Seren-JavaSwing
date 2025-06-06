@@ -10,6 +10,8 @@ import com.seren.controller.ExcluirPacienteController;
 import com.seren.model.Paciente;
 import com.seren.model.Usuario;
 import com.seren.util.DataUtil;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -17,12 +19,15 @@ import java.util.ArrayList;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -35,6 +40,8 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
      */
     public TelaPacientes() {
         initComponents();
+        setResizable(false);
+
     }
 
     private Usuario usuario;
@@ -53,13 +60,26 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
     public TelaPacientes(Usuario usuarioLogado) {
         initComponents();
         this.usuario = usuarioLogado;
+        exibirInfoUsuario();
 
+        //tirando a borda de uma tela separada
         this.setBorder(null);
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
+
         criarMenuPopup();
         adicionarListenerTabela();
         carregarPacientesNaTabela();
+        // Listener para detectar mudanças no campo de busca
+        buscarInputBuscarPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e) {
+                String textoBusca = buscarInputBuscarPaciente.getText().trim();
+                if (textoBusca.isEmpty()) {
+                    carregarPacientesNaTabela(); // carrega todos os pacientes automaticamente
+                }
+            }
+        });
     }
 
     public void carregarPacientesNaTabela() {
@@ -92,6 +112,9 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         }
 
         tabelaPacientes.setModel(modelo);
+
+        JTableHeader cabecalho = tabelaPacientes.getTableHeader();
+        cabecalho.setFont(new Font("Segoe UI Ligth", Font.BOLD, 18));
     }
 
     /**
@@ -106,12 +129,16 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         jFrame1 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
         jDesktopPane2 = new javax.swing.JDesktopPane();
+        jPanel2 = new javax.swing.JPanel();
+        btnBuscarPacienteNome = new com.seren.components.RoundedButton(30);
+        buscarInputBuscarPaciente = new com.seren.components.RoundedJFormattedTextField(30);
+        labelNomeUsuario = new javax.swing.JLabel();
+        labelEmailUsuario = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaPacientes = new javax.swing.JTable();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jLabel1 = new javax.swing.JLabel();
+        btnCadastrarPaciente = new com.seren.components.RoundedButton(30);
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -123,40 +150,119 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
             jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
+
         setPreferredSize(new java.awt.Dimension(700, 630));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(700, 600));
 
+        jDesktopPane2.setBackground(new java.awt.Color(255, 246, 248));
+
+        jPanel2.setBackground(new java.awt.Color(255, 246, 248));
+        jPanel2.setLayout(null);
+
+        btnBuscarPacienteNome.setBackground(new java.awt.Color(1, 66, 158));
+        btnBuscarPacienteNome.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        btnBuscarPacienteNome.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscarPacienteNome.setText("Buscar");
+        btnBuscarPacienteNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarPacienteNomeActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnBuscarPacienteNome);
+        btnBuscarPacienteNome.setBounds(310, 30, 90, 40);
+
+        buscarInputBuscarPaciente.setBackground(new java.awt.Color(255, 255, 255));
+        buscarInputBuscarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        buscarInputBuscarPaciente.setForeground(new java.awt.Color(0, 0, 0));
+        buscarInputBuscarPaciente.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 10));
+        buscarInputBuscarPaciente.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        buscarInputBuscarPaciente.setMinimumSize(new java.awt.Dimension(390, 40));
+        buscarInputBuscarPaciente.setPreferredSize(new java.awt.Dimension(390, 40));
+        jPanel2.add(buscarInputBuscarPaciente);
+        buscarInputBuscarPaciente.setBounds(10, 30, 390, 40);
+
+        labelNomeUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        labelNomeUsuario.setText("Nome usuario");
+        jPanel2.add(labelNomeUsuario);
+        labelNomeUsuario.setBounds(550, 30, 140, 16);
+
+        labelEmailUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        labelEmailUsuario.setText("Email usuario");
+        labelEmailUsuario.setPreferredSize(new java.awt.Dimension(94, 20));
+        jPanel2.add(labelEmailUsuario);
+        labelEmailUsuario.setBounds(550, 50, 140, 20);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/perfilUsuario.png"))); // NOI18N
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(480, 20, 60, 60);
+
+        tabelaPacientes.setAutoCreateRowSorter(true);
+        tabelaPacientes.setBackground(new java.awt.Color(255, 246, 248));
+        tabelaPacientes.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        tabelaPacientes.setForeground(new java.awt.Color(0, 0, 0));
         tabelaPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
-                "Nome"
+
             }
         ));
+        tabelaPacientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tabelaPacientes.setRowHeight(50);
+        tabelaPacientes.setRowSorter(null);
+        tabelaPacientes.setSelectionBackground(new java.awt.Color(255, 204, 204));
+        tabelaPacientes.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tabelaPacientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tabelaPacientes.setShowGrid(false);
         jScrollPane1.setViewportView(tabelaPacientes);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(1, 66, 158));
+        jLabel1.setText("Pacientes");
+
+        btnCadastrarPaciente.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        btnCadastrarPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/userplus.png"))); // NOI18N
+        btnCadastrarPaciente.setText("Adicionar paciente");
+        btnCadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarPacienteActionPerformed(evt);
+            }
+        });
+
+        jDesktopPane2.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane2.setLayer(btnCadastrarPaciente, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
         jDesktopPane2.setLayout(jDesktopPane2Layout);
         jDesktopPane2Layout.setHorizontalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
-                .addContainerGap(174, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                        .addComponent(btnCadastrarPaciente)))
+                .addContainerGap())
         );
         jDesktopPane2Layout.setVerticalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCadastrarPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -167,32 +273,10 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        jMenu1.setText("Ações");
-
-        jMenuItem1.setText("Criar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Buscar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,11 +288,16 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void exibirInfoUsuario() {
+        labelNomeUsuario.setText(usuario.getNome());
+        labelEmailUsuario.setText(usuario.getEmail());
+    }
 
     private void criarMenuPopup() {
         menuPopup = new JPopupMenu();
@@ -259,6 +348,8 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
             TelaEditarPaciente telaEditar = new TelaEditarPaciente(this.usuario, paciente, this);
             jDesktopPane2.add(telaEditar);
             telaEditar.setVisible(true);
+            telaEditar.centralizar(); //centralizando o jInternal que vem
+
         }
     }
 
@@ -286,30 +377,39 @@ public class TelaPacientes extends javax.swing.JInternalFrame {
         }
     }
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+    private void btnCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarPacienteActionPerformed
         TelaCadastrarPaciente cadastrarPaciente = new TelaCadastrarPaciente(this.usuario, this);
         jDesktopPane2.add(cadastrarPaciente);
         cadastrarPaciente.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        cadastrarPaciente.centralizar(); //centralizando o jInternal que vem
+    }//GEN-LAST:event_btnCadastrarPacienteActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void btnBuscarPacienteNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteNomeActionPerformed
         // TODO add your handling code here:
-        TelaBuscarPaciente buscarPaciente = new TelaBuscarPaciente(this.usuario, this);
-        jDesktopPane2.add(buscarPaciente);
-        buscarPaciente.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        String nome = buscarInputBuscarPaciente.getText();
 
+        if (nome.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo vazio, insira o nome do paciente.");
+            carregarPacientesNaTabela();
+            return;
+        }
+        carregarPacientesNaTabela(nome);
+    }//GEN-LAST:event_btnBuscarPacienteNomeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarPacienteNome;
+    private javax.swing.JButton btnCadastrarPaciente;
+    private javax.swing.JTextField buscarInputBuscarPaciente;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JFrame jFrame1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelEmailUsuario;
+    private javax.swing.JLabel labelNomeUsuario;
     private javax.swing.JTable tabelaPacientes;
     // End of variables declaration//GEN-END:variables
+
 }
