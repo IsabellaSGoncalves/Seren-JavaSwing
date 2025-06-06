@@ -40,7 +40,8 @@ public class CustomJCalendar extends JCalendar {
 
         Component[] dias = dayChooser.getDayPanel().getComponents();
         for (Component comp : dias) {
-            if (comp instanceof JButton btn) {
+            if (comp instanceof JButton) {
+                JButton btn = (JButton) comp;
                 btn.setContentAreaFilled(false);
                 btn.setFocusPainted(false);
                 btn.setBorderPainted(false);
