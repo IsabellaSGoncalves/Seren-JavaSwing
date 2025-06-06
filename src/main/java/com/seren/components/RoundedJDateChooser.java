@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
  * @author narie
  */
 public class RoundedJDateChooser extends JDateChooser {
+
     private int cornerRadius;
 
     public RoundedJDateChooser(int cornerRadius) {
@@ -29,7 +30,8 @@ public class RoundedJDateChooser extends JDateChooser {
 
     private void customizeDateEditor() {
         // O editor do JDateChooser é um JTextField
-        if (getDateEditor() instanceof JComponent editor) {
+        if (getDateEditor() instanceof JComponent) {
+            JComponent editor = (JComponent) getDateEditor();
             editor.setOpaque(false);
             editor.setBorder(new EmptyBorder(5, 10, 5, 10));
         }
