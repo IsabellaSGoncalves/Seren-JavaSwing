@@ -152,7 +152,6 @@ public class TelaEditarPaciente extends javax.swing.JInternalFrame {
 
         btnCancelarEdicao.setBackground(new java.awt.Color(204, 204, 204));
         btnCancelarEdicao.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        btnCancelarEdicao.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelarEdicao.setText("Cancelar");
         btnCancelarEdicao.setPreferredSize(new java.awt.Dimension(170, 35));
         btnCancelarEdicao.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +175,7 @@ public class TelaEditarPaciente extends javax.swing.JInternalFrame {
         jLabel9.setText("Editar paciente");
 
         try {
-            telefoneInputEditarPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-#### ")));
+            telefoneInputEditarPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-#### ")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }

@@ -193,7 +193,6 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
 
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Cancelar");
         jButton1.setPreferredSize(new java.awt.Dimension(170, 35));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +210,7 @@ public class TelaCadastrarPaciente extends javax.swing.JInternalFrame {
         jLabel9.setBounds(165, 18, 260, 32);
 
         try {
-            telefoneInputCadastrarPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-#### ")));
+            telefoneInputCadastrarPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-#### ")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }

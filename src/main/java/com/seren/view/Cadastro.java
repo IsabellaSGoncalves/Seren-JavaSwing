@@ -132,7 +132,7 @@ public class Cadastro extends javax.swing.JFrame {
         emailInputCadastro.setBounds(120, 250, 230, 30);
 
         usernameInputCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        usernameInputCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        usernameInputCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         usernameInputCadastro.setMargin(new java.awt.Insets(0, 30, 0, 10));
         usernameInputCadastro.setNextFocusableComponent(telefoneInputCadastro);
         usernameInputCadastro.setPreferredSize(new java.awt.Dimension(230, 30));
@@ -193,7 +193,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel13.setBounds(120, 350, 200, 15);
 
         try {
-            telefoneInputCadastro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-#### ")));
+            telefoneInputCadastro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-#### ")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }

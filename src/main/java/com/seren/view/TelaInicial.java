@@ -136,7 +136,6 @@ public class TelaInicial extends javax.swing.JFrame {
 
         labelApresentarUsername.setBackground(new java.awt.Color(255, 246, 248));
         labelApresentarUsername.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
-        labelApresentarUsername.setForeground(new java.awt.Color(0, 0, 0));
         labelApresentarUsername.setText("Bom dia, Usuário!");
 
         jPanel3.setBackground(new java.awt.Color(255, 246, 248));
@@ -154,7 +153,6 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel8.setVerifyInputWhenFocusTarget(false);
 
         labelTotalPacientes.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        labelTotalPacientes.setForeground(new java.awt.Color(0, 0, 0));
         labelTotalPacientes.setText("Total Pacientes Cadastrados");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info2.png"))); // NOI18N
@@ -235,9 +233,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Pacientes.png"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(190, 190));
 
-        pacientesButton.setBackground(new java.awt.Color(255, 255, 255));
         pacientesButton.setFont(new java.awt.Font("Segoe UI Light", 1, 24)); // NOI18N
-        pacientesButton.setForeground(new java.awt.Color(0, 0, 0));
         pacientesButton.setText("Pacientes");
         pacientesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,7 +279,6 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
                         .addComponent(labelApresentarUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(276, 276, 276)))
                 .addContainerGap(38, Short.MAX_VALUE))
@@ -308,7 +303,7 @@ public class TelaInicial extends javax.swing.JFrame {
         labelSerengotoInitialScreen.setFont(new java.awt.Font("Segoe Script", 0, 48)); // NOI18N
         labelSerengotoInitialScreen.setForeground(new java.awt.Color(1, 66, 158));
         labelSerengotoInitialScreen.setText("Seren");
-        labelSerengotoInitialScreen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelSerengotoInitialScreen.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.add(labelSerengotoInitialScreen);
         labelSerengotoInitialScreen.setBounds(24, 17, 150, 77);
 
@@ -319,13 +314,12 @@ public class TelaInicial extends javax.swing.JFrame {
         labelSairgotoLogin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labelSairgotoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Log out.png"))); // NOI18N
         labelSairgotoLogin.setText("Sair");
-        labelSairgotoLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        labelSairgotoLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         labelSairgotoLogin.setIconTextGap(10);
 
         labelSerentoMeuPerfil.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
-        labelSerentoMeuPerfil.setForeground(new java.awt.Color(0, 0, 0));
         labelSerentoMeuPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        labelSerentoMeuPerfil.setText(" Meu Pefil");
+        labelSerentoMeuPerfil.setText(" Meu Perfil");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
